@@ -9,6 +9,7 @@ const Global = createGlobalStyle`
         background: ${ colors.darkWhite };
         font-size: 16px;
         font-family: 'Open Sans', sans-serif;
+        overflow-x: hidden;
     }
 
     *, *::after, *::before{
