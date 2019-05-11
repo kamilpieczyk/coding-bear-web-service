@@ -100,16 +100,32 @@ const SpecialOffers = styled.div`
     }
 `;
 
-const HomeWelcomeScreen = ({ title, content }) => {
-    const [ specialOfferValue, setSpecialOfferValue ] = useState("");
+const LazyLoader = styled.img`
+    width: 30px;
+    height: 30px;
+`;
 
+const MessangeContainer = styled.div`
+    color: ${ colors.white };
+    font-size: .8rem;
+`;
+
+const HomeWelcomeScreen = ({ title, content }) => {
+    //component state
+    const [ specialOfferValue, setSpecialOfferValue ] = useState("");
+    const [ validation, setValidation ] = useState(true);
+    const [ loader, setLoader ] = useState(false);
+    const [ messange, setMessange ] = useState(null);
+    //post email function
     const addEmail = () => {
-        // const body = new FormData();
-        // body.append("email", specialOfferValue);
+        //change loader state
+        setLoader(true);
+        //preparing body to post
         let body = {
             email: specialOfferValue
         }
         body = JSON.stringify(body);
+        //post data to backend 
         fetch('/api/9b859fee-242d-4e66-bde3-7febc4c77b95/subscribe-email', {
             method: 'POST',
             headers: {
@@ -117,9 +133,38 @@ const HomeWelcomeScreen = ({ title, content }) => {
             },
             body
         })
-            // .then(res => res.json())
-            .then(status => console.log(status.json()))
-            .catch(err => console.log(err));
+            .then( res => res.json() )
+            .then( res => {
+                setLoader(false);
+                console.log( res );
+                if( res.status === "exist" ){
+                    setMessange('this email alredy exist in database');
+                }
+                else{
+                    setMessange('your email adress has been added - thank you');
+                }
+            } )
+            .catch( err => {
+                setMessange('database connection problem, try again later');
+            } );
+    }
+
+    const handleEmailForm = e => {
+        //handling input for email subscription
+        setSpecialOfferValue( e.target.value );
+        //validation
+        const reg = /[a-zA-Z0-9.-]@[a-zA-Z0-9.-]/;
+        const test = reg.test(e.target.value);
+        if( !test ) {
+            setMessange('this email adress is not valid');
+            setValidation(false);
+        }
+        else{
+            if( !validation ) {
+                setValidation(true);
+                setMessange('');
+            }
+        };
     }
 
     return(
@@ -143,10 +188,21 @@ const HomeWelcomeScreen = ({ title, content }) => {
                         type="text" 
                         placeholder="put your email adress" 
                         value={ specialOfferValue }
-                        onChange={ (e) => setSpecialOfferValue( e.target.value ) }
+                        onChange={ handleEmailForm }
                     />
-                    <ButtonArrow action={ addEmail }/>
+
+                    { !loader ?
+                        validation ? <ButtonArrow action={ addEmail }/> : null :
+                        <LazyLoader src="/static/images/white-loader.gif" alt="loader" />
+                    }
+
                 </div>
+
+                { messange ?
+                    <MessangeContainer> { messange } </MessangeContainer> :
+                    null
+                }
+
             </SpecialOffers>
 
         </Container>

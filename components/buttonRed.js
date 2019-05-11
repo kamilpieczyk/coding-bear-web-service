@@ -4,7 +4,7 @@ import colors from '../styles/colors';
 
 const Button = styled.button`
     background: ${ colors.third };
-    border-radius: 50px;
+    border-radius: ${ props => props.rounded ? "5px" : "50px"};
     border: none;
     padding: 10px 15px;
     color: white;
@@ -16,9 +16,9 @@ const Button = styled.button`
     }
 `;
 
-const ButtonRed = ({ title,to }) => (
+const ButtonRed = ({ title, to, rounded }) => (
     <Link href={ to }>
-        <Button>{ title }</Button>
+        <Button rounded = {rounded}>{ title }</Button>
     </Link>
 );
 

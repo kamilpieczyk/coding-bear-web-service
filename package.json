@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "server": "nodemon ssr-server.js",
     "dev": "node ssr-server.js",
     "build": "next build",
     "start": "next start"

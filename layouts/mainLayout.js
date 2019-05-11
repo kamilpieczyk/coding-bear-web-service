@@ -2,6 +2,7 @@ import React from 'react';
 import { createGlobalStyle } from 'styled-components'
 import colors from "../styles/colors";
 import Header from '../components/header';
+import Footer from '../components/footer';
 
 const Global = createGlobalStyle`
     body{
@@ -22,6 +23,7 @@ const MainLayout = ({ children }) => (
         <Global />
         <Header />
         { children }
+        <Footer />
     </>
 );
 

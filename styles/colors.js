@@ -6,7 +6,8 @@ const colors = () => {
         third: '#C1272D',
         white: '#FFFFFF',
         darkWhite: '#E8E8E8',
-        grey: '#707070'
+        grey: '#707070',
+        darkMain: '#47172D'
     }
 
     return colors;
