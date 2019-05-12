@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import colors from '../styles/colors';
 import Link from 'next/link';
 import ButtonRed from './buttonRed';
+import {StoreConsumer} from "../context/store.context";
+import cookie from "browser-cookies";
 
 const Container = styled.nav`
     position: fixed;
@@ -163,6 +165,44 @@ const Submenu = styled.div`
     }
 `;
 
+const SignIn = styled.div`
+    position: fixed;
+    top: 80px;
+    left: ${props => props.position}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: ${props => props.visible ? "220px" : 0};
+    opacity: ${props => props.visible ? 1 : 0};
+    width: 350px;
+    background: ${colors.darkWhite};
+    border-radius: 5px;
+    transition: .3s;
+    overflow: hidden;
+
+    input{
+        margin: 10px 0;
+        border: 1px solid ${colors.third};
+        border-radius: 5px;
+        height: 45px;
+        width: 80%;
+        background: ${colors.darkWhite};
+        text-align: center;
+        :focus{
+            outline: none;
+            background: ${colors.white};
+        }
+    }
+`;
+
+const MessangeLogin = styled.div`
+        margin: 5px;
+        color: red;
+        font-weight: 100;
+        font-size: .8rem;
+`;
+
 class Header extends Component{
 
     constructor(props){
@@ -172,16 +212,25 @@ class Header extends Component{
             scrolled: false,
             submenu: false,
             search: false,
+            signIn: false,
             searchBoxPosition: null,
+            signInPosition: null,
             searchInput: {
                 value: ""
+            },
+            login: {
+                username: "",
+                password: "",
+                message: null
             }
         }
     }
 
     handleSearchClick = () => {
         this.setState({
-            search: !this.state.search
+            search: !this.state.search,
+            submenu: false,
+            signIn: false
         })
     }
 
@@ -195,30 +244,101 @@ class Header extends Component{
         })
     }
 
+    handleSignIn = () => {
+        this.setState({
+            signIn: !this.state.signIn,
+            search: false,
+            submenu: false
+        })
+    }
+
+    handleSignOut = () => {
+        cookie.erase('passport');
+        location.replace('/');
+    }
+
+    handleSignInInputs = e => {
+        const input = e.target.name;
+        if(input === "login"){
+            this.setState({
+                login: {
+                    ...this.state.login,
+                    username: e.target.value
+                }
+            })
+        }
+        else if(input === "password"){
+            this.setState({
+                login: {
+                    ...this.state.login,
+                    password: e.target.value
+                }
+            })
+        }
+    }
+
+    handleLogin = () => {
+        fetch('http://localhost:3000/api/9b859fee-242d-4e66-bde3-7febc4c77b95/signin',{
+            method: "post",
+            headers: {"content-type": "application/json"},
+            body: JSON.stringify({
+                email: this.state.login.username,
+                password: this.state.login.password
+            })
+        })
+            .then(res => res.json())
+            .then(json => {
+                const status = json.status;
+                if(status === "ok"){
+                    location.replace("/");
+                }
+                else{
+                    this.setState({
+                        login: {
+                            ...this.state.login,
+                            message: 'invalid email or password'
+                        }
+                    })
+                }
+            })
+            .catch( err => location.replace('500'));
+    }
+
     handleSubmenuClick = (e) => {
         e.preventDefault();
         this.setState({
-            submenu: !this.state.submenu
+            submenu: !this.state.submenu,
+            search: false,
+            signIn: false
         })
     }
 
     componentDidMount(){
+        // fetch menu from api
         fetch('/api/9b859fee-242d-4e66-bde3-7febc4c77b95/menu')
             .then( res => res.json() )
             .then( menu => {
                 this.setState({
                     menu
                 })
-        });
-
+            })
+            .catch( err => location.replace('500'));
+        // set elements position in menu
         const searchBoxPosition = document.getElementById('search').offsetLeft;
+        if(document.getElementById('signIn')){
+            const signInPosition = document.getElementById('signIn').offsetLeft;
+            this.setState({
+                signInPosition
+            });
+        }
+
         this.setState({
-            searchBoxPosition
+            searchBoxPosition,
         });
 
         document.addEventListener('scroll', (ev) => {
             const scroll = window.scrollY;
-            if(scroll > 200){
+            if(scroll > 100){
                 this.setState({
                     scrolled: true
                 })
@@ -262,13 +382,27 @@ class Header extends Component{
                         <div><img src="/static/images/baseline-search-24px.png" /></div>
                         Search
                     </MenuItemSpecial>
+                    
+                    {/* add global store consumer */}
+                    <StoreConsumer>
+                        {({user}) => (
+                            !user.logged
 
-                    <MenuItemSpecial>
-                        Sign in
-                        <div>
-                            <img src="/static/images/Path 102.png" />
-                        </div>
-                    </MenuItemSpecial>
+                                ?<MenuItemSpecial onClick={this.handleSignIn} id="signIn">
+                                    Sign in
+                                    <div>
+                                        <img src="/static/images/Path 102.png" />
+                                    </div>
+                                </MenuItemSpecial>
+
+                                :<MenuItemSpecial onClick={this.handleSignOut}>
+                                    Sign out
+                                    <div>
+                                        <img src="/static/images/signout.png" />
+                                    </div>
+                                </MenuItemSpecial>
+                        )}
+                    </StoreConsumer>
 
                 </div>
 
@@ -299,6 +433,26 @@ class Header extends Component{
                         <img src="/static/images/search.png" alt="search-icon"/>
                     </button>
                 </SearchBox>
+
+                <SignIn visible={this.state.signIn} position={this.state.signInPosition}>
+                    <input 
+                        type="text" 
+                        value={this.state.login.username} 
+                        placeholder="email adress"
+                        name="login"
+                        onChange={this.handleSignInInputs}
+                    />
+                    <input 
+                        type="password" 
+                        value={this.state.login.password} 
+                        placeholder="password"
+                        name="password"
+                        onChange={this.handleSignInInputs}
+                    />
+                    {/* if incorrect login show this message */}
+                    {this.state.login.message ? <MessangeLogin>{this.state.login.message}</MessangeLogin> : null}
+                    <ButtonRed rounded title="sign in" action={this.handleLogin}/>
+                </SignIn>
 
                 {/* submenu for solutions */}
                 { this.state.menu ? <Submenu visible={ this.state.submenu }>

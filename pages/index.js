@@ -5,7 +5,6 @@ import colors from '../styles/colors';
 import Head from 'next/head';
 import HomeWelcomeScreen from '../components/homeWelcomeScreen';
 import WhyYouShouldChooseCodingBear from '../components/whyYouShouldChooseCodingBear';
-import HowToOrder from '../components/howToOrder';
 
 const Container = styled.div`
     
@@ -25,7 +24,7 @@ class Index extends Component{
                     homeContent
                 })
             })
-            .catch( err => location.replace('504'));
+            .catch( err => location.replace('500'));
     }
     
     render(){
@@ -43,7 +42,6 @@ class Index extends Component{
                             content={ this.state.homeContent[0].homeWelcomeScreen.content }
                         /> 
                         <WhyYouShouldChooseCodingBear content={ this.state.homeContent[1].whyyoushouldchoosecodingbear }/>
-                        <HowToOrder content={this.state.homeContent[2].howtoorder} />
                         
                     </> : null }
 

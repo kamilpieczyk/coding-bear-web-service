@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import colors from '../styles/colors';
 import Link from 'next/link';
+import {useEffect, useState} from "react";
+import HowToOrder from '../components/howToOrder';
 
 
 const ContentBox = ({title, content}) => {
@@ -21,6 +23,9 @@ const ContentBox = ({title, content}) => {
             text-decoration: none;
             :hover{text-decoration: underline;}
             
+        }
+        h2{
+            font-size: 1rem;
         }
         div{
             display: flex;
@@ -48,28 +53,52 @@ const ContentBox = ({title, content}) => {
 const Footer = () => {
     // Footer style
     const Container = styled.footer`
+        padding: 150px 0 20px 0;
         width: 100vw;
-        height: 504px;
         background: ${colors.darkMain};
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        
         #top{
             display: flex;
             flex-direction: row;
         }
         #bottom{
+            
             div{
                 width: 80vw;
-                height: 2px;
+                height: 1px;
                 background: ${colors.white};
+            }
+            section{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: ${colors.white};
+                font-size: .7rem;
+                font-weight: 100;
+                margin-top: 20px;
+                img{margin: 0 15px;}
             }
         }
         
     `;
+    // state
+    const [ howToOrder, setHowToOrder] = useState(null);
+
+    // get data for how to order
+    useEffect( () => {
+        fetch('http://localhost:3000/api/9b859fee-242d-4e66-bde3-7febc4c77b95/home')
+            .then(res => res.json())
+            .then(json => setHowToOrder(json))
+            .catch( err => location.replace('504'));
+        }, []);
     // return JSX to render
     return(
+        <>
+        { howToOrder ? <HowToOrder content={howToOrder[2].howtoorder} /> : null}
         <Container>
             <div id="top">
 
@@ -157,8 +186,18 @@ const Footer = () => {
             <div id="bottom">
                     <div></div>
 
+                    <section>
+                        <img src="/static/images/bears_head.png" alt="logo"/>
+                        <span>
+                            © 2019 CODING-BEAR<br/>
+                            coding-bear, coding bear logo and bear's head <br/>
+                            are registred trademarks of coding-bear
+                        </span>
+                    </section>
+
             </div>
         </Container>
+        </>
     )
 }
 

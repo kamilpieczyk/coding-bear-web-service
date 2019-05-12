@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components'
 import colors from "../styles/colors";
 import Header from '../components/header';
 import Footer from '../components/footer';
+import {StoreProvider} from '../context/store.context';
 
 const Global = createGlobalStyle`
     body{
@@ -19,12 +20,12 @@ const Global = createGlobalStyle`
 `;
 
 const MainLayout = ({ children }) => (
-    <>
+    <StoreProvider>
         <Global />
         <Header />
         { children }
         <Footer />
-    </>
+    </StoreProvider>
 );
 
 export default MainLayout;

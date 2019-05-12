@@ -193,7 +193,7 @@ const HomeWelcomeScreen = ({ title, content }) => {
 
                     { !loader ?
                         validation ? <ButtonArrow action={ addEmail }/> : null :
-                        <LazyLoader src="/static/images/white-loader.gif" alt="loader" />
+                        <LazyLoader src="/static/images/loader.gif" alt="loader" />
                     }
 
                 </div>

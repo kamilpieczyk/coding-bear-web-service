@@ -6,15 +6,15 @@ import DiscountInfo from '../components/discountInfo';
 // styles
 const Container = styled.section`
     width: 100vw;
-    height: 100vh;
     position: relative;
 `;
 
 const Content = styled.div`
     width: 100%;
     height: 100%;
+    padding: 60px 0 80px 0;
     background: url('/static/images/background.png');
-    background-size: 100% 100%;
+    background-size: cover;
     display: grid;
     grid-template-columns: 50% 50%;
     div{
@@ -34,7 +34,7 @@ const Content = styled.div`
 
 // component
 const HowToOrder = ({content}) => {
-    console.log(content);
+    
     return(
         <Container>
             <Title>{content.title}</Title>

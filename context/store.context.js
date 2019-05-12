@@ -1,0 +1,62 @@
+import React, {Component} from 'react';
+import cookie from 'browser-cookies';
+
+const StoreContext = React.createContext();
+
+export class StoreProvider extends Component{
+    state ={
+        user: {
+            logged: false,
+            email: null,
+            name: null
+        }
+    }
+
+    login = (email, name) => {
+        this.setState({
+            user: {
+                ...this.state.user,
+                logged: true,
+                email,
+                name
+            }
+        })
+    }
+
+    componentDidMount(){
+        const passport = cookie.get('passport');
+        fetch('http://localhost:3000/api/9b859fee-242d-4e66-bde3-7febc4c77b95/authentyfication',{
+            method: "post",
+            headers: {"content-type": "application/json"},
+            body: JSON.stringify({
+                passport: passport
+            })
+        })
+            .then(res => res.json())
+            .then(json => {
+                const status = json.status;
+                if(status === "ok"){
+                    this.login(json.email, json. name)
+                }
+            })
+            .catch( err => {
+                console.log(err);
+                // location.replace('500')
+            });
+        
+    }
+
+    render(){
+        return(
+            <StoreContext.Provider
+                value={{
+                    user: this.state.user
+                }}
+            >
+                {this.props.children}
+            </StoreContext.Provider>
+        )
+    }
+}
+
+export const StoreConsumer = StoreContext.Consumer;

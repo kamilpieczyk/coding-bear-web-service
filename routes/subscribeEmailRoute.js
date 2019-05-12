@@ -13,7 +13,7 @@ const subscribeEmail = ( req,res ) => {
         const collection = client.db(dbConnect.name).collection('emails');
         collection.find({email: email}).toArray( (err,data) => {
             test.equal(null, err);
-            console.log( data[0] );
+
             if( data[0] ){
                 const response = {
                     status: "exist"

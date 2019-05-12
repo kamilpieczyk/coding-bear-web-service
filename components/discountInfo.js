@@ -15,7 +15,7 @@ const Container = styled.div`
     height: 180px;
     border-radius: 10px;
     left: 50%;
-    bottom: -150px;
+    bottom: -100px;
     transform: translateX(-50%);
 `;
 
@@ -23,7 +23,7 @@ const DiscountInfo = () => {
     return(
         <Container>
             <p>Do You've got voucher with discount?</p>
-            <ButtonRed rounded title="Realize it" to="/voucher"/>
+            <ButtonRed rounded title="Redeem" to="/voucher"/>
         </Container>
     )
 }
