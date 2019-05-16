@@ -5,6 +5,7 @@ import Link from 'next/link';
 import ButtonRed from './buttonRed';
 import {StoreConsumer} from "../context/store.context";
 import cookie from "browser-cookies";
+import UserMenu from "./userMenu";
 
 const Container = styled.nav`
     position: fixed;
@@ -292,6 +293,14 @@ class Header extends Component{
                 if(status === "ok"){
                     location.replace("/");
                 }
+                else if(status === "notApproved"){
+                    this.setState({
+                        login: {
+                            ...this.state.login,
+                            message: 'please confirm your email before you login'
+                        }
+                    })
+                }
                 else{
                     this.setState({
                         login: {
@@ -412,7 +421,13 @@ class Header extends Component{
                     </SocialMediaIcons>
 
                 <div>
-                    <ButtonRed title = 'SIGN UP' to='/signup' />
+                    <StoreConsumer>
+                            { ({user}) => (
+                                user.logged
+                                ? <UserMenu name={user.name} />
+                                : <ButtonRed title = 'SIGN UP' to='/signup' />
+                            )}
+                    </StoreConsumer>
                 </div>
 
                 <SearchBox

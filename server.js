@@ -27,6 +27,9 @@ const server = ( handle ) => {
     server.post(api + 'signin' , require('./routes/signin'));
     server.post(api + 'authentyfication' , require('./routes/authentyfication'));
 
+    //apply email route
+    server.get('/register', require('./routes/applyEmail'));
+
     //if route is not defined go to next.js
     server.get('*', (req, res) => {
       return handle(req, res);

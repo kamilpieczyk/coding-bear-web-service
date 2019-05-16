@@ -82,7 +82,7 @@ const Register = () => {
         const value = e.target.value;
         const regExEmail = /[a-zA-Z0-9.-]@[a-zA-Z0-9.-]/;
         const regExPassword = /[a-zA-Z0-9!@#$%^&*_+]{8}/;
-        const regEx = /[!@#$%^&*(){}[_+-=,./<>?;:'"]/;
+        const regEx = /[!@#$%^&*(){}[_+=,/<>?;:'"]/;
 
         switch(input){
             case "email":

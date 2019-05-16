@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import colors from "../styles/colors";
 
 const Container = styled.section`
-    background: url('static/images/subpage_background.png');
+    background: ${ props => props.noBackground ? colors.third : url('static/images/subpage_background.png')};
     background-size: cover;
     margin-top: 70px;
     width: 100vw;
@@ -16,7 +16,7 @@ const Container = styled.section`
 
 const TitleHeader = (props) => {
     return(
-        <Container>
+        <Container noBackground = {props.noBackground}>
             <h1>{props.title}</h1>
             <p>{props.children}</p>
         </Container>

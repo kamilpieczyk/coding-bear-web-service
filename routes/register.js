@@ -3,7 +3,7 @@ const test = require('assert');
 const dbConnect= require('../dbConnect');
 const bcrypt =require('bcrypt');
 const passportGenerator = require('hash-generator');
-
+const registrationMail = require('../modules/registrationMail');
 const register = ( req,res ) => {
 
     const client = new MongoClient(dbConnect.uri, { useNewUrlParser: true });
@@ -57,6 +57,7 @@ const register = ( req,res ) => {
                         test.equal(null, err);
                         console.log("user added to database");
                         res.json({status: "ok"});
+                        registrationMail(newUser.email, newUser.name, newUser.passport).catch(console.error);
                     })
                 }
             })

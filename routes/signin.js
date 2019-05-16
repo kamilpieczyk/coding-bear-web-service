@@ -32,16 +32,23 @@ const signin = ( req,res ) => {
                 if(data[0]){
                     const passport = data[0].passport;
                     const password = data[0].password;
-                    if(bcrypt.compareSync(user.password, password)){
-                        res.cookie("passport", passport, {maxAge: 14400000});
-                        res.json({
-                            status: "ok",
-                        });
+                    const status = data[0].status;
+
+                    if(status === "notApproved"){
+                        res.json({status: "notApproved"})
                     }
                     else{
-                        res.json({
-                            status: "invalidPassword"
-                        })
+                        if(bcrypt.compareSync(user.password, password)){
+                            res.cookie("passport", passport, {maxAge: 14400000});
+                            res.json({
+                                status: "ok",
+                            });
+                        }
+                        else{
+                            res.json({
+                                status: "invalidPassword"
+                            })
+                        }
                     }
 
                 }
