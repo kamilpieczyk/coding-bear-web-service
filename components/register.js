@@ -24,6 +24,9 @@ const Container = styled.section`
             border-color: ${colors.main};
             color: ${colors.main};
         }
+        @media (max-width: 450px){
+            width: 80vw;
+        }
     }
     div{
         border: 1px solid red;
@@ -44,7 +47,13 @@ const Container = styled.section`
             color: ${colors.third};
             margin: 0;
             padding: 0;
-            input{width: 20vw; margin: 0 4px;}
+            input{
+                width: 20vw; 
+                margin: 0 4px;
+                @media (max-width: 450px){
+                    width: 40vw;
+                }
+            }
             div{
                 border: 1px solid red;
                 border-radius: 5px;

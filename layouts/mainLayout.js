@@ -3,7 +3,8 @@ import { createGlobalStyle } from 'styled-components'
 import colors from "../styles/colors";
 import Header from '../components/header';
 import Footer from '../components/footer';
-import {StoreProvider} from '../context/store.context';
+import {StoreProvider, StoreConsumer} from '../context/store.context';
+import MobileHeader from '../components/mobileHeader';
 
 const Global = createGlobalStyle`
     body{
@@ -22,7 +23,17 @@ const Global = createGlobalStyle`
 const MainLayout = ({ children }) => (
     <StoreProvider>
         <Global />
-        <Header />
+        <StoreConsumer>
+            {({device}) => (
+                device === "desktop"
+                    ? <Header />
+                    : device === "mobile"
+                        ? <MobileHeader />
+                        : device === "tablet"
+                            ? <MobileHeader />
+                            : null
+            )}
+        </StoreConsumer>
         { children }
         <Footer />
     </StoreProvider>

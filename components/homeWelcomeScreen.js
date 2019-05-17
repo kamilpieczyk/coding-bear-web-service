@@ -8,6 +8,17 @@ const Container = styled.section`
     height: 100vh;
     background: url('/static/images/Group_26.png');
     background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+
+    @media (max-width: 450px){
+        background: url('/static/images/mobilebg.png');
+        background-size: 100vw 90vh;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 const ImageContainer = styled.div`
@@ -29,6 +40,10 @@ const ImageContainer = styled.div`
         z-index: 48;
         top: 240px;
         animation: database-shadow 3s infinite ease-out;
+    }
+
+    @media (max-width: 450px){
+        display: none;
     }
 
     @keyframes database{
@@ -74,6 +89,9 @@ const Content = styled.div`
         font-size: 1.2rem;
         margin-top: 0;
     }
+    @media (max-width: 450px){
+        position: static;
+    }
 `;
 
 const SpecialOffers = styled.div`
@@ -88,15 +106,19 @@ const SpecialOffers = styled.div`
         display: flex;
         margin: 20px 10%;
         
-    input{
-        border: none;
-        border-radius: 50px;
-        background: ${ colors.white };
-        height: 40px;
-        text-align: center;
-        margin: 0 5px;
-        outline: none;
+        input{
+            border: none;
+            border-radius: 50px;
+            background: ${ colors.white };
+            height: 40px;
+            text-align: center;
+            margin: 0 5px;
+            outline: none;
+        }
     }
+    @media (max-width: 450px){
+        position: static;
+        margin: 0;
     }
 `;
 

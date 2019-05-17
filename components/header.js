@@ -322,6 +322,22 @@ class Header extends Component{
         })
     }
 
+    componentWillUnmount(){
+        document.removeEventListener('scroll', (ev) => {
+            const scroll = window.scrollY;
+            if(scroll > 100){
+                this.setState({
+                    scrolled: true
+                })
+            }
+            else{
+                this.setState({
+                    scrolled: false
+                })
+            }
+        })
+    }
+
     componentDidMount(){
         // fetch menu from api
         fetch('/api/9b859fee-242d-4e66-bde3-7febc4c77b95/menu')
@@ -376,7 +392,7 @@ class Header extends Component{
                     {/* menu container */}
                     { this.state.menu !== null ? 
                         this.state.menu.map( el => (
-                            <MenuItem key={ el._id }>
+                            <MenuItem key={ el.title }>
                                 <Link href={ el.to }>
                                 { el.submenu ? 
                                     <a onClick={ this.handleSubmenuClick }>{ el.title }</a> :
@@ -479,7 +495,7 @@ class Header extends Component{
                         </div>
 
                         { this.state.menu[2].submenu[0].map( el => (
-                        <Link key={ el._id } href={ el.to }>
+                        <Link key={ el.name } href={ el.to }>
                             <a>{ el.name }</a>
                         </Link>
                     )) }
@@ -493,7 +509,7 @@ class Header extends Component{
                         </div>
 
                         { this.state.menu[2].submenu[1].map( el => (
-                        <Link key={ el._id } href={ el.to }>
+                        <Link key={ el.name } href={ el.to }>
                             <a>{ el.name }</a>
                         </Link>
                     )) }
@@ -507,7 +523,7 @@ class Header extends Component{
                         </div>
 
                         { this.state.menu[2].submenu[2].map( el => (
-                        <Link key={ el._id } href={ el.to }>
+                        <Link key={ el.name } href={ el.to }>
                             <a>{ el.name }</a>
                         </Link>
                     )) }
@@ -521,7 +537,7 @@ class Header extends Component{
                         </div>
 
                         { this.state.menu[2].submenu[3].map( el => (
-                        <Link key={ el._id } href={ el.to }>
+                        <Link key={ el.name } href={ el.to }>
                             <a>{ el.name }</a>
                         </Link>
                     )) }

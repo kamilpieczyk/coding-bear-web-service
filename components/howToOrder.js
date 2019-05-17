@@ -17,6 +17,12 @@ const Content = styled.div`
     background-size: cover;
     display: grid;
     grid-template-columns: 50% 50%;
+    @media (max-width: 450px){
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     div{
         display: flex;
         flex-direction: column;
@@ -26,9 +32,15 @@ const Content = styled.div`
         p{
             width: 80%;
         }
+        @media (max-width: 450px){
+            align-items: center;
+        }
     }
     div:first-child{
         align-items: center;
+        @media (max-width: 450px){
+            display: none;
+        }
     }
 `;
 

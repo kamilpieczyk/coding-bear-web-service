@@ -17,6 +17,13 @@ const Container = styled.div`
     left: 50%;
     bottom: -100px;
     transform: translateX(-50%);
+    @media (max-width: 450px) {
+        justify-content: center;
+        font-size: 1rem;
+        flex-direction: column;
+        padding: 0 10%;
+        text-align: center;
+    }
 `;
 
 const DiscountInfo = () => {

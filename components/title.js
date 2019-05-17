@@ -15,6 +15,11 @@ const H1 = styled.h1`
         height: 3px;
         background: ${ props => props.color };
     }
+
+    @media (max-width: 450px) {
+        margin: 0 5vw;
+        ::after{ content: none; }
+    }
 `;
 
 const Title = ({ color = '#601F3C' , children }) => {

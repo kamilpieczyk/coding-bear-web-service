@@ -14,6 +14,9 @@ const ContentBox = ({title, content}) => {
         color: ${colors.white};
         font-weight: 100;
         font-size: .8rem;
+        @media (max-width: 450px){
+                margin: 20px 5vw;
+            }
         img{
             width: 25px;
             height: 25px;
@@ -41,7 +44,7 @@ const ContentBox = ({title, content}) => {
         <Container>
             <h2>{title}</h2>
             {content.map( el => (
-                <div>
+                <div key={el.id}>
                     {el.image ? <div><img src={el.image} alt="footer-element"/></div> : null}
                     {el.link ? <div><Link href={el.link}>{el.value}</Link></div> : <div>{el.value}</div>}
                 </div>
@@ -64,6 +67,9 @@ const Footer = () => {
         #top{
             display: flex;
             flex-direction: row;
+            @media (max-width: 450px){
+                flex-direction: column;
+            }
         }
         #bottom{
             
@@ -98,7 +104,7 @@ const Footer = () => {
     // return JSX to render
     return(
         <>
-        { howToOrder ? <HowToOrder content={howToOrder[2].howtoorder} /> : null}
+        { howToOrder && <HowToOrder content={howToOrder[2].howtoorder} /> }
         <Container>
             <div id="top">
 
@@ -107,11 +113,13 @@ const Footer = () => {
                     content={[
                         {
                             value: "07593706457",
-                            image: "/static/images/mobile-solid.png"
+                            image: "/static/images/mobile-solid.png",
+                            id: 1
                         },
                         {
                             value: "kamil@coding-bear.co.uk",
-                            image: "/static/images/envelope-solid.png"
+                            image: "/static/images/envelope-solid.png",
+                            id: 2
                         }
                     ]}
                 />
@@ -121,15 +129,18 @@ const Footer = () => {
                     content={[
                         {
                             value: "home",
-                            link: "/"
+                            link: "/",
+                            id: 1
                         },
                         {
                             value: "about",
-                            link: "/about"
+                            link: "/about",
+                            id: 2
                         },
                         {
                             value: "contact",
-                            link: "/contact"
+                            link: "/contact",
+                            id: 3
                         }
                     ]}
                 />
@@ -139,23 +150,28 @@ const Footer = () => {
                     content={[
                         {
                             value: "static websites",
-                            link: "/staticwebsites"
+                            link: "/staticwebsites",
+                            id: 1
                         },
                         {
                             value: "web apps",
-                            link: "/webapps"
+                            link: "/webapps",
+                            id: 2
                         },
                         {
                             value: "backend/database",
-                            link: "/backend"
+                            link: "/backend",
+                            id: 3
                         },
                         {
                             value: "mobile apps - android",
-                            link: "/android"
+                            link: "/android",
+                            id: 4
                         },
                         {
                             value: "windows apps",
-                            link: "/windows"
+                            link: "/windows",
+                            id: 5
                         }
                     ]}
                 />
@@ -166,17 +182,20 @@ const Footer = () => {
                         {
                             value: "Facebook",
                             link: "https://www.facebook.com/CodingBearUK",
-                            image: "/static/images/facebook-square-brands.png"
+                            image: "/static/images/facebook-square-brands.png",
+                            id: 1
                         },
                         {
                             value: "Github",
                             link: "https://github.com/codingbearuk",
-                            image: "/static/images/github-brands.png"
+                            image: "/static/images/github-brands.png",
+                            id: 2
                         },
                         {
                             value: "Linkedin",
                             link: "https://www.linkedin.com/in/kamil-pieczyk-b21401167/",
-                            image: "/static/images/linkedin-brands.png"
+                            image: "/static/images/linkedin-brands.png",
+                            id: 3
                         }
                     ]}
                 />

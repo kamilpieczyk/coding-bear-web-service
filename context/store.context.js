@@ -9,7 +9,8 @@ export class StoreProvider extends Component{
             logged: false,
             email: null,
             name: null
-        }
+        },
+        device: "mobile"
     }
 
     login = (email, name) => {
@@ -23,7 +24,33 @@ export class StoreProvider extends Component{
         })
     }
 
+    getDeviceScreen = () => {
+        const condition = screen => {
+            if(screen <= 450) return "mobile";
+            else if(screen <= 900) return "tablet";
+            else return "desktop";
+        }
+
+        let screen = window.innerWidth;
+        let device = condition(screen);
+
+        this.setState({
+            device
+        });
+
+        window.addEventListener("resize", e => {
+            screen = window.innerWidth;
+            device = condition(screen);
+
+            this.setState({
+                device
+            });
+        });
+    }
+
     componentDidMount(){
+        // get passport identification
+
         const passport = cookie.get('passport');
         fetch('http://localhost:3000/api/9b859fee-242d-4e66-bde3-7febc4c77b95/authentyfication',{
             method: "post",
@@ -43,14 +70,17 @@ export class StoreProvider extends Component{
                 console.log(err);
                 // location.replace('500')
             });
-        
+
+            // get device screen
+            this.getDeviceScreen();   
     }
 
     render(){
         return(
             <StoreContext.Provider
                 value={{
-                    user: this.state.user
+                    user: this.state.user,
+                    device: this.state.device
                 }}
             >
                 {this.props.children}

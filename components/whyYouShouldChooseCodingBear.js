@@ -18,8 +18,12 @@ const Header = styled.div`
         left: 50%;
         transform: translateX(-50%);
         font-weight: 100;
+        @media (max-width: 450px){
+            width: 90vw;
+        }
     }
 `;
+
 const Options = styled.div`
     display: flex;
     align-items: center;
@@ -42,6 +46,10 @@ const Options = styled.div`
             width: 90%;
         }
     }
+
+    @media (max-width: 450px){
+        flex-direction: column;
+    }
 `;
 // component
 const WhyYouShouldChooseCodingBear = ({content}) => {
@@ -56,7 +64,7 @@ const WhyYouShouldChooseCodingBear = ({content}) => {
 
             <Options>
                 {content.items.map( el => (
-                    <div>
+                    <div key = {el.title}>
                         <img src = {el.image} alt  = {el.title}/>
                         <h2>{el.title}</h2>
                         <p>{el.content}</p>
