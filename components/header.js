@@ -181,6 +181,7 @@ const SignIn = styled.div`
     border-radius: 5px;
     transition: .3s;
     overflow: hidden;
+    box-shadow: 0px 0px 5px ${colors.grey};
 
     input{
         margin: 10px 0;

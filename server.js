@@ -26,6 +26,9 @@ const server = ( handle ) => {
     server.post(api + 'register' , require('./routes/register'));
     server.post(api + 'signin' , require('./routes/signin'));
     server.post(api + 'authentyfication' , require('./routes/authentyfication'));
+    server.post(api + 'voucher' , require('./routes/voucher'));
+    server.post(api + 'voucher-finnish' , require('./routes/voucher-finnish'));
+    server.post(api + 'get-projects' , require('./routes/getProjects'));
 
     //apply email route
     server.get('/register', require('./routes/applyEmail'));
