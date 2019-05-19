@@ -74,7 +74,7 @@ const VoucherApp = ({email, name}) => {
 
     const handleNext = () => {
 
-        fetch('http://localhost:3000/api/9b859fee-242d-4e66-bde3-7febc4c77b95/voucher',{
+        fetch('/api/9b859fee-242d-4e66-bde3-7febc4c77b95/voucher',{
             method: "post",
             headers: {"content-type": "application/json"},
             body: JSON.stringify({
@@ -98,7 +98,7 @@ const VoucherApp = ({email, name}) => {
     }
     const handleFinnish = () => {
 
-        fetch('http://localhost:3000/api/9b859fee-242d-4e66-bde3-7febc4c77b95/voucher-finnish',{
+        fetch('/api/9b859fee-242d-4e66-bde3-7febc4c77b95/voucher-finnish',{
             method: "post",
             headers: {"content-type": "application/json"},
             body: JSON.stringify({

@@ -2,7 +2,7 @@ const MongoClient = require('mongodb').MongoClient;
 const test = require('assert');
 const dbConnect= require('../dbConnect');
 
-const home = ( req,res ) => {
+const home = ( req, res ) => {
 
     const client = new MongoClient(dbConnect.uri, { useNewUrlParser: true });
     

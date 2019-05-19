@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const path = require('path');
 
 const server = ( handle ) => {
     //create api key and route to api
@@ -10,7 +11,7 @@ const server = ( handle ) => {
     const server = express();
     server.listen(3000, (err) => {
       if (err) throw err
-      console.log('> Ready on http://localhost:3000');
+      console.log(path.join(__dirname));
     });
     //midleware
     server.use(bodyParser.urlencoded({ extended: true }));
@@ -31,7 +32,7 @@ const server = ( handle ) => {
     server.post(api + 'get-projects' , require('./routes/getProjects'));
 
     //apply email route
-    server.get('/register', require('./routes/applyEmail'));
+    server.get('/applyEmail', require('./routes/applyEmail'));
 
     //if route is not defined go to next.js
     server.get('*', (req, res) => {

@@ -6,6 +6,7 @@ import {StoreConsumer} from "../context/store.context";
 import ButtonRed from "./buttonRed";
 import UserMenuMobile from "./userMenuMobile";
 import cookie from "browser-cookies";
+import Router from "next/router";
 
 const Container = styled.nav`
     position: fixed;
@@ -131,7 +132,7 @@ const MobileHeader = () => {
     }
 
     const handleLogin = () => {
-        fetch('http://localhost:3000/api/9b859fee-242d-4e66-bde3-7febc4c77b95/signin',{
+        fetch('/api/9b859fee-242d-4e66-bde3-7febc4c77b95/signin',{
             method: "post",
             headers: {"content-type": "application/json"},
             body: JSON.stringify({
@@ -152,7 +153,7 @@ const MobileHeader = () => {
                     setMessage("invalid email or password")
                 }
             })
-            .catch( err => location.replace('500'))
+            .catch( err => Router.push("/500"))
     }
     
     useEffect( () => {
@@ -160,7 +161,7 @@ const MobileHeader = () => {
         fetch("/api/9b859fee-242d-4e66-bde3-7febc4c77b95/menu")
             .then(res => res.json())
             .then(menu => setMenu(menu))
-            // .catch(location.replace('/500'));
+            .catch(Router.push("/500"));
     }, [])
 
     return(

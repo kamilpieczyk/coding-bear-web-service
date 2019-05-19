@@ -2,6 +2,7 @@ import styled from "styled-components";
 import colors from "../styles/colors";
 import {useState, useEffect} from "react";
 import ButtonRed from "./buttonRed";
+import Router from "next/router";
 
 //styles for component
 const Container = styled.section`
@@ -158,7 +159,7 @@ const Register = () => {
     //function for send form
     const sendForm = () => {
         setSubmit(true);
-        fetch('http://localhost:3000/api/9b859fee-242d-4e66-bde3-7febc4c77b95/register',{
+        fetch('/api/9b859fee-242d-4e66-bde3-7febc4c77b95/register',{
             method: "post",
             headers: {"content-type": "application/json"},
             body: JSON.stringify({
@@ -199,7 +200,7 @@ const Register = () => {
                     console.log(json)
                 }
             })
-            .catch( err => location.replace('500'));
+            .catch( err => Router.push("/500"));
 
     }
     // component did update

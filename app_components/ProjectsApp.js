@@ -62,7 +62,7 @@ const ProjectsApp = ({email, name}) => {
     }
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/9b859fee-242d-4e66-bde3-7febc4c77b95/get-projects',{
+        fetch('/api/9b859fee-242d-4e66-bde3-7febc4c77b95/get-projects',{
             method: "post",
             headers: {"content-type": "application/json"},
             body: JSON.stringify({

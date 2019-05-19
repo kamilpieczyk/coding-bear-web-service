@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import cookie from 'browser-cookies';
+import Router from "next/router";
 
 const StoreContext = React.createContext();
 
@@ -52,24 +53,26 @@ export class StoreProvider extends Component{
         // get passport identification
 
         const passport = cookie.get('passport');
-        fetch('http://localhost:3000/api/9b859fee-242d-4e66-bde3-7febc4c77b95/authentyfication',{
-            method: "post",
-            headers: {"content-type": "application/json"},
-            body: JSON.stringify({
-                passport: passport
+        if(passport){    
+            fetch('/api/9b859fee-242d-4e66-bde3-7febc4c77b95/authentyfication',{
+                method: "post",
+                headers: {"content-type": "application/json"},
+                body: JSON.stringify({
+                    passport: passport
+                })
             })
-        })
-            .then(res => res.json())
-            .then(json => {
-                const status = json.status;
-                if(status === "ok"){
-                    this.login(json.email, json. name)
-                }
-            })
-            .catch( err => {
-                console.log(err);
-                // location.replace('500')
-            });
+                .then(res => res.json())
+                .then(json => {
+                    const status = json.status;
+                    if(status === "ok"){
+                        this.login(json.email, json. name)
+                    }
+                })
+                .catch( err => {
+                    console.log(err);
+                    Router.push("/500");
+                });
+        }
 
             // get device screen
             this.getDeviceScreen();   

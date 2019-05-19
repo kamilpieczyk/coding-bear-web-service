@@ -6,6 +6,7 @@ import ButtonRed from './buttonRed';
 import {StoreConsumer} from "../context/store.context";
 import cookie from "browser-cookies";
 import UserMenu from "./userMenu";
+import Router from "next/router";
 
 const Container = styled.nav`
     position: fixed;
@@ -280,7 +281,7 @@ class Header extends Component{
     }
 
     handleLogin = () => {
-        fetch('http://localhost:3000/api/9b859fee-242d-4e66-bde3-7febc4c77b95/signin',{
+        fetch('/api/9b859fee-242d-4e66-bde3-7febc4c77b95/signin',{
             method: "post",
             headers: {"content-type": "application/json"},
             body: JSON.stringify({
@@ -311,7 +312,7 @@ class Header extends Component{
                     })
                 }
             })
-            .catch( err => location.replace('500'));
+            .catch( err => Router.push("/500"));
     }
 
     handleSubmenuClick = (e) => {
@@ -348,7 +349,7 @@ class Header extends Component{
                     menu
                 })
             })
-            .catch( err => location.replace('500'));
+            .catch( err => Router.push("/500"));
         // set elements position in menu
         const searchBoxPosition = document.getElementById('search').offsetLeft;
         if(document.getElementById('signIn')){
