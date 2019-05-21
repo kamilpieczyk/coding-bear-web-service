@@ -312,7 +312,7 @@ class Header extends Component{
                     })
                 }
             })
-            .catch( err => Router.push("/500"));
+            // .catch( err => Router.push("/500"));
     }
 
     handleSubmenuClick = (e) => {
@@ -349,7 +349,7 @@ class Header extends Component{
                     menu
                 })
             })
-            .catch( err => Router.push("/500"));
+            // .catch( err => Router.push("/500"));
         // set elements position in menu
         const searchBoxPosition = document.getElementById('search').offsetLeft;
         if(document.getElementById('signIn')){

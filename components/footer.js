@@ -99,7 +99,7 @@ const Footer = () => {
         fetch('/api/9b859fee-242d-4e66-bde3-7febc4c77b95/home')
             .then(res => res.json())
             .then(json => setHowToOrder(json))
-            .catch( err => location.replace('500'));
+            // .catch( err => location.replace('500'));
         }, []);
     // return JSX to render
     return(

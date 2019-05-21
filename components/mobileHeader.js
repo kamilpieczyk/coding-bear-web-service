@@ -153,7 +153,7 @@ const MobileHeader = () => {
                     setMessage("invalid email or password")
                 }
             })
-            .catch( err => Router.push("/500"))
+            // .catch( err => Router.push("/500"))
     }
     
     useEffect( () => {
@@ -161,7 +161,7 @@ const MobileHeader = () => {
         fetch("/api/9b859fee-242d-4e66-bde3-7febc4c77b95/menu")
             .then(res => res.json())
             .then(menu => setMenu(menu))
-            .catch(Router.push("/500"));
+            // .catch(Router.push("/500"));
     }, [])
 
     return(

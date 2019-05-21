@@ -68,10 +68,9 @@ export class StoreProvider extends Component{
                         this.login(json.email, json. name)
                     }
                 })
-                .catch( err => {
-                    console.log(err);
-                    Router.push("/500");
-                });
+                // .catch( err => {
+                //     Router.push("/500");
+                // });
         }
 
             // get device screen
