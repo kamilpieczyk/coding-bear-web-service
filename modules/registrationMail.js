@@ -1,13 +1,15 @@
 const nodemailer = require('nodemailer');
 
+require('dotenv').config();
+
 const registrationMail = async(email, name, passport) => {
     let transport = nodemailer.createTransport({
-        host: "smtp.ionos.co.uk",
-        port: "587",
+        host: process.env.email_host,
+        port: process.env.email_port,
         secure: false,
         auth: {
-            user: "auto-sender@coding-bear.co.uk",
-            pass: "Aez@2478144"
+            user: process.env.email_sender,
+            pass: process.env.email_pass
         }
     });
 
@@ -15,11 +17,6 @@ const registrationMail = async(email, name, passport) => {
         from: "Coding Bear Registration <auto-sender@coding-bear.co.uk>",
         to: email,
         subject: "Coding-Bear Portal Registration",
-        // attachments: [{
-        //     filename: "logo.png",
-        //     path: '../static/images/logo.png',
-        //     cid: 'logo'
-        // }],
         html: `
             <body style="
                 margin: 0;

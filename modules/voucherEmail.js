@@ -1,13 +1,15 @@
+require("dotenv").config();
+
 const nodemailer = require('nodemailer');
 
 const voucherMail = async(email, name, phone, value, description) => {
     let transport = nodemailer.createTransport({
-        host: "smtp.ionos.co.uk",
-        port: "587",
+        host: process.env.email_host,
+        port: process.env.email_port,
         secure: false,
         auth: {
-            user: "auto-sender@coding-bear.co.uk",
-            pass: "Aez@2478144"
+            user: process.env.email_sender,
+            pass: process.env.email_pass
         }
     });
 
