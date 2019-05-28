@@ -1,8 +1,9 @@
-const nodemailer = require('nodemailer');
-
 require('dotenv').config();
 
+const nodemailer = require('nodemailer');
+
 const registrationMail = async(email, name, passport) => {
+
     let transport = nodemailer.createTransport({
         host: process.env.email_host,
         port: process.env.email_port,
@@ -14,7 +15,7 @@ const registrationMail = async(email, name, passport) => {
     });
 
     await transport.sendMail({
-        from: "Coding Bear Registration <auto-sender@coding-bear.co.uk>",
+        from: "Coding Bear Registration <noreplay@coding-bear.co.uk>",
         to: email,
         subject: "Coding-Bear Portal Registration",
         html: `
@@ -65,7 +66,9 @@ const registrationMail = async(email, name, passport) => {
             </div>
             </body>
         `
-    });
+    })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
 }
 
 module.exports = registrationMail;

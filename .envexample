@@ -1,0 +1,7 @@
+api_key = <apiKey>
+email_sender = <emailAdress>
+email_pass = <password>
+email_host = <smtpHost>
+email_port = <smtpPort>
+db_name = <dataBaseName>
+db_uri = <mongodbUri>

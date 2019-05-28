@@ -6,12 +6,12 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
     
 app.prepare()
-.then(() => {
-  
-    server( handle );
 
-})
-.catch((ex) => {
-  console.error(ex.stack)
-  process.exit(1)
-})
+  .then(() => {
+      server( handle );
+  })
+  
+  .catch((ex) => {
+    console.error(ex.stack)
+    process.exit(1)
+  })

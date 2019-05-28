@@ -1,8 +1,11 @@
 # dependencies
 /node_modules
 # production
- /build
+/build
 # next folder
 /.next
 # process env
 .env
+# sll certificate
+certificate.cer
+key.key

@@ -1,18 +1,32 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const fs = require('fs');
+// const https = require('https');
 
 const server = ( handle ) => {
-    //create api key and route to api
-    const apiKey = '9b859fee-242d-4e66-bde3-7febc4c77b95';
+    //create api keys and certificates
+    const apiKey = process.env.api_key;
     const api = `/api/${ apiKey }/`;
+    const certificate = fs.readFileSync('certificate.cer');
+    const privateKey = fs.readFileSync('key.key');
+    const credentials = {key: privateKey, cert: certificate};
     //create and listen server
     const server = express();
+    // const httpsServer = https.createServer(credentials, server);
+    // httpsServer.listen(3000, (err) => {
+    //   if (err) throw err
+    //   console.log(path.join(__dirname));
+    // });
+
     server.listen(3000, (err) => {
       if (err) throw err
       console.log(path.join(__dirname));
     });
+
     //midleware
     server.use(bodyParser.urlencoded({ extended: true }));
     server.use(bodyParser.json());
@@ -32,10 +46,16 @@ const server = ( handle ) => {
     server.post(api + 'get-projects' , require('./routes/getProjects'));
 
     //apply email route
-    server.get('/applyEmail', require('./routes/applyEmail'));
+    server.get('/register', require('./routes/applyEmail'));
 
     //if route is not defined go to next.js
     server.get('*', (req, res) => {
+      // if(req.protocol === 'https'){
+      //   return handle(req, res);
+      // }
+      // else if (req.protocol === 'http'){
+      //   res.redirect('https://' + req.headers.host + req.url);
+      // }
       return handle(req, res);
   });
 }
