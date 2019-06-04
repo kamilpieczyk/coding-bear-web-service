@@ -6,6 +6,7 @@
   "scripts": {
     "server": "nodemon ssr-server.js",
     "dev": "node ssr-server.js",
+    "export": "next export",
     "build": "next build",
     "start": "next start"
   },

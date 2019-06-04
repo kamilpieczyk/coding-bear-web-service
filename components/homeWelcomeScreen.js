@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import colors from '../styles/colors';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ButtonArrow from './buttonArrow';
 
 const Container = styled.section`
@@ -132,12 +132,26 @@ const MessangeContainer = styled.div`
     font-size: .8rem;
 `;
 
-const HomeWelcomeScreen = ({ title, content }) => {
+const HomeWelcomeScreen = ({title, content}) => {
     //component state
     const [ specialOfferValue, setSpecialOfferValue ] = useState("");
     const [ validation, setValidation ] = useState(true);
     const [ loader, setLoader ] = useState(false);
     const [ messange, setMessange ] = useState(null);
+    // const [ title, setTitle ] = useState('loading...');
+    // const [ content, setContent ] = useState('loading...');
+
+    // component did mount
+
+    // useEffect( () => {
+    //     fetch('/api/9b859fee-242d-4e66-bde3-7febc4c77b95/home')
+    //     .then( res => res.json() )
+    //     .then( homeContent => {
+    //         setTitle(homeContent[0].homeWelcomeScreen.title);
+    //         setContent(homeContent[0].homeWelcomeScreen.content);
+    //     })
+    // })
+
     //post email function
     const addEmail = () => {
         //change loader state

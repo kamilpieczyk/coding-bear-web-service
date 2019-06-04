@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import styled from 'styled-components';
 import MainLayout from '../layouts/mainLayout';
-import colors from '../styles/colors';
+import Loading from "../components/loading";
+//import colors from '../styles/colors';
 import Head from 'next/head';
 import HomeWelcomeScreen from '../components/homeWelcomeScreen';
 import WhyYouShouldChooseCodingBear from '../components/whyYouShouldChooseCodingBear';
@@ -13,7 +14,8 @@ const Container = styled.div`
 class Index extends Component{
 
     state = {
-        homeContent: null
+        homeContent: null,
+        loading: true
     }
 
     componentDidMount(){
@@ -21,7 +23,8 @@ class Index extends Component{
             .then( res => res.json() )
             .then( homeContent => {
                 this.setState({
-                    homeContent
+                    homeContent,
+                    loading: false
                 })
             })
             // .catch( err => location.replace('500'));
@@ -33,7 +36,7 @@ class Index extends Component{
                 <Head>
                     <title>Coding - bear bespoke websites and apps</title>
                 </Head>
-
+                <Loading active={this.state.loading} />
                 <Container>
                     { this.state.homeContent ? 
                     <>

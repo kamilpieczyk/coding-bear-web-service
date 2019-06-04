@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const fs = require('fs');
-// const https = require('https');
+const https = require('https');
 
 const server = ( handle ) => {
     //create api keys and certificates
@@ -16,16 +16,17 @@ const server = ( handle ) => {
     const credentials = {key: privateKey, cert: certificate};
     //create and listen server
     const server = express();
-    // const httpsServer = https.createServer(credentials, server);
-    // httpsServer.listen(3000, (err) => {
-    //   if (err) throw err
-    //   console.log(path.join(__dirname));
-    // });
+    const httpsServer = https.createServer(credentials, server);
 
-    server.listen(3000, (err) => {
+    httpsServer.listen(3000, (err) => {
       if (err) throw err
       console.log(path.join(__dirname));
     });
+
+    // server.listen(3000, (err) => {
+    //   if (err) throw err
+    //   console.log(path.join(__dirname));
+    // });
 
     //midleware
     server.use(bodyParser.urlencoded({ extended: true }));
@@ -50,14 +51,14 @@ const server = ( handle ) => {
 
     //if route is not defined go to next.js
     server.get('*', (req, res) => {
-      // if(req.protocol === 'https'){
-      //   return handle(req, res);
-      // }
-      // else if (req.protocol === 'http'){
-      //   res.redirect('https://' + req.headers.host + req.url);
-      // }
+      if(req.protocol === 'https'){
+        return handle(req, res);
+      }
+      else if (req.protocol === 'http'){
+        res.redirect('https://' + req.headers.host + req.url);
+      }
       return handle(req, res);
-  });
+    });
 }
 
 module.exports = server;
