@@ -501,7 +501,7 @@ class Header extends Component{
                         </div>
 
                         { this.state.menu[2].submenu[0].map( el => (
-                        <Link key={ el.name } href={ el.to }>
+                        <Link key={ el.name } href={ { pathname: '/solutions', query: { name: el.to } } }>
                             <a>{ el.name }</a>
                         </Link>
                     )) }
@@ -515,7 +515,7 @@ class Header extends Component{
                         </div>
 
                         { this.state.menu[2].submenu[1].map( el => (
-                        <Link key={ el.name } href={ el.to }>
+                        <Link key={ el.name } href={ { pathname: '/solutions', query: { name: el.to } } }>
                             <a>{ el.name }</a>
                         </Link>
                     )) }
@@ -529,7 +529,7 @@ class Header extends Component{
                         </div>
 
                         { this.state.menu[2].submenu[2].map( el => (
-                        <Link key={ el.name } href={ el.to }>
+                        <Link key={ el.name } href={ { pathname: '/solutions', query: { name: el.to } } }>
                             <a>{ el.name }</a>
                         </Link>
                     )) }
@@ -543,7 +543,7 @@ class Header extends Component{
                         </div>
 
                         { this.state.menu[2].submenu[3].map( el => (
-                        <Link key={ el.name } href={ el.to }>
+                        <Link key={ el.name } href={ { pathname: '/solutions', query: { name: el.to } } }>
                             <a>{ el.name }</a>
                         </Link>
                     )) }

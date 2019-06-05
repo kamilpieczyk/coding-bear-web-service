@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon ssr-server.js",
     "build": "next build",
-    "start": "node ssr-server"
+    "start": "NODE_ENV=production node ssr-server",
+    "dev": "node ssr-server"
   },
   "keywords": [
     "coding",

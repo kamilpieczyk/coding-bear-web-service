@@ -187,13 +187,13 @@ const MobileHeader = () => {
                     ? <img src="/static/images/loader.gif" alt="...loading" />
                     : menu.map(el => (
                         el.submenu
-                            ? <><Link href={el.to} key={el.title}>
-                                <a onClick = {() => setSubmenu(!submenu)}>{el.title}</a>
-                              </Link>
+                            ? <>
+                                <a key={el.title} onClick = {() => setSubmenu(!submenu)}>{el.title}</a>
+                              
                               <div>
                                 {submenu && el.submenu.map(subEl => (
                                     subEl.map(link => (
-                                        <Link href={link.to} key={link.name}>
+                                        <Link href={{ pathname: '/solutions', query: { name: link.to }}} key={link.name}>
                                             <a>{link.name}</a>
                                         </Link>
                                     ))
