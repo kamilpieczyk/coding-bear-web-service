@@ -194,7 +194,10 @@ const MobileHeader = () => {
                                 {submenu && el.submenu.map(subEl => (
                                     subEl.map(link => (
                                         <Link href={{ pathname: '/solutions', query: { name: link.to }}} key={link.name}>
-                                            <a>{link.name}</a>
+                                            <a onClick = {() => {
+                                                setSubmenu(false);
+                                                setActive(false);
+                                            }}>{link.name}</a>
                                         </Link>
                                     ))
                                 ))}
