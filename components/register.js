@@ -174,7 +174,7 @@ const Register = () => {
             .then(json => {
                 const status = json.status;
                 if(status === "ok"){
-                    location.replace("/accountcreated")
+                    Router.push("/accountcreated")
                 }
                 else if(status === "exist"){
                     setEmailMessange("this email exist in database");

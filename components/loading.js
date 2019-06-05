@@ -7,25 +7,30 @@ const Container = styled.div`
     height: 100%;
     background: ${colors.white};
     position: fixed;
+    left: 0; top: 0;
     z-index: 1000;
     display: ${ props => props.visible ? "flex" : "none" };
     flex-direction: row;
     justify-content: center;
     align-items: center;
 
+    h1{
+        padding-bottom: 20px;
+        font-weight: 100;
+    }
     div{
         width: 10px;
         height: 10px;
         margin-right: 5px;
         background: ${colors.main};
         border-radius: 50%;
-        animation: dot 0.8s;
+        animation: dot 1s;
         animation-iteration-count: infinite;
     }
-    div:nth-child(2){
+    div:nth-child(3){
         animation-delay: 0.2s;
     }
-    div:nth-child(3){
+    div:nth-child(4){
         animation-delay: 0.3s;
     }
 
@@ -35,9 +40,11 @@ const Container = styled.div`
         }
         65%{
             margin-bottom: 20px;
+            background: ${colors.second};
         }
         100%{
             margin-bottom: 0;
+            background: ${colors.main};
         }
     }
 `;
@@ -45,6 +52,7 @@ const Container = styled.div`
 const Loading = ({active}) => {
     return(
         <Container visible={active}>
+            <h1>site is loading now</h1>
             <div></div>
             <div></div>
             <div></div>

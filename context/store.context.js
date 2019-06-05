@@ -11,7 +11,8 @@ export class StoreProvider extends Component{
             email: null,
             name: null
         },
-        device: "mobile"
+        device: "mobile",
+        loading: true
     }
 
     login = (email, name) => {
@@ -49,6 +50,12 @@ export class StoreProvider extends Component{
         });
     }
 
+    setLoading = (bool) => {
+        this.setState({
+            loading: bool
+        })
+    }
+
     componentDidMount(){
         // get passport identification
 
@@ -68,9 +75,6 @@ export class StoreProvider extends Component{
                         this.login(json.email, json. name)
                     }
                 })
-                // .catch( err => {
-                //     Router.push("/500");
-                // });
         }
 
             // get device screen
@@ -82,7 +86,9 @@ export class StoreProvider extends Component{
             <StoreContext.Provider
                 value={{
                     user: this.state.user,
-                    device: this.state.device
+                    device: this.state.device,
+                    loading: this.state.loading,
+                    setLoading: this.setLoading
                 }}
             >
                 {this.props.children}

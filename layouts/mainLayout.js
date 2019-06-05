@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components'
 import colors from "../styles/colors";
 import Header from '../components/header';
 import Footer from '../components/footer';
-import {StoreProvider, StoreConsumer} from '../context/store.context';
+import { StoreConsumer } from '../context/store.context';
 import MobileHeader from '../components/mobileHeader';
 
 const Global = createGlobalStyle`
@@ -21,7 +21,7 @@ const Global = createGlobalStyle`
 `;
 
 const MainLayout = ({ children }) => (
-    <StoreProvider>
+    <>
         <Global />
         <StoreConsumer>
             {({device}) => (
@@ -36,7 +36,7 @@ const MainLayout = ({ children }) => (
         </StoreConsumer>
         { children }
         <Footer />
-    </StoreProvider>
+    </>
 );
 
 export default MainLayout;

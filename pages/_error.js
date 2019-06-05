@@ -1,7 +1,9 @@
-import styled from 'styled-components';
-import {createGlobalStyle} from "styled-components";
-import colors from '../styles/colors';
-import Head from 'next/head';
+import styled from 'styled-components'
+import { createGlobalStyle } from "styled-components"
+import colors from '../styles/colors'
+import Head from 'next/head'
+import React, { useState, useEffect } from 'react'
+import { StoreConsumer } from '../context/store.context';
 
 const Global = createGlobalStyle`
     body{
@@ -56,12 +58,24 @@ const Container = styled.div`
 `;
 
 const _error = () => {
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        document.addEventListener('load', () => setLoaded(true));
+    });
+
     return(
         <>
             <Global />
             <Head>
                 <title>404 not found || coding-bear.co.uk</title>
             </Head>
+
+            { !loaded && 
+            <StoreConsumer>{
+                ({loading, setLoading}) => ( loading && setLoading(false) )
+            }</StoreConsumer>
+            }
 
             <Container>
                 <div>

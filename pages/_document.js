@@ -10,7 +10,8 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>Coding-bear Next/express Boilerplate</title>
+          <link rel="manifest" href="static/manifest.json"/>
+          <link rel="shortcut icon" href="static/images/icon.png" />
           <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet"/>
         </Head>
         <body>

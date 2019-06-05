@@ -1,35 +1,48 @@
-import styled from 'styled-components';
-import AppLayout from '../layouts/appLayout';
-import Head from 'next/head';
+import styled from 'styled-components'
+import AppLayout from '../layouts/appLayout'
+import Head from 'next/head'
 import {StoreConsumer} from "../context/store.context"
-import AlertApp from "../app_components/AlertApp";
-import ProjectsApp from "../app_components/ProjectsApp";
+import AlertApp from "../app_components/AlertApp"
+import ProjectsApp from "../app_components/ProjectsApp"
+import React, { useState, useEffect } from 'react'
 
 const Container = styled.div`
 `;
 
 const MyProjects = () => {
+    const [loaded, setLoaded] = useState(false);
+    useEffect(() => {
+        document.addEventListener('load', () => setLoaded(true));
+    });
 
     return(
-        <AppLayout>
-            <Head>
-                <title>Voucher || Coding - bear bespoke websites and apps</title>
-            </Head>
+        <>
+            { !loaded && 
+            <StoreConsumer>{
+                ({loading, setLoading}) => ( loading && setLoading(false) )
+            }</StoreConsumer>
+            }
 
-            <Container>
-                <StoreConsumer>{
-                    ({user}) => (
-                        user.logged
-                            ? <ProjectsApp email={user.email} name={user.name}/>
+            <AppLayout>
+                <Head>
+                    <title>Voucher || Coding - bear bespoke websites and apps</title>
+                </Head>
 
-                            : <AlertApp title ="Application alert">
-                                You need to sign in to see this page
-                              </AlertApp>
-                    )
-                }</StoreConsumer>
-            </Container>
+                <Container>
+                    <StoreConsumer>{
+                        ({user}) => (
+                            user.logged
+                                ? <ProjectsApp email={user.email} name={user.name}/>
 
-        </AppLayout>
+                                : <AlertApp title ="Application alert">
+                                    You need to sign in to see this page
+                                </AlertApp>
+                        )
+                    }</StoreConsumer>
+                </Container>
+
+            </AppLayout>
+        </>
     )
 }
 
