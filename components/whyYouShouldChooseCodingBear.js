@@ -6,7 +6,6 @@ import colors from '../styles/colors';
 const Container = styled.section`
     margin-top: 60px;
     width: 100vw;
-    min-height: 100vh;
     
 `;
 const Header = styled.div`

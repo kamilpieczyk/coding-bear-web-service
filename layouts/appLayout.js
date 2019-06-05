@@ -24,10 +24,7 @@ const Global = createGlobalStyle`
 const Footer = styled.footer`
     color: ${colors.grey};
     text-align: center;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    display: block;
 `;
 
 const Space = styled.div`

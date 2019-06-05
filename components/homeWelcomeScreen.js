@@ -5,15 +5,18 @@ import ButtonArrow from './buttonArrow';
 
 const Container = styled.section`
     width: 100vw;
-    height: 100vh;
+    height: 625px;
     background: url('/static/images/Group_26.png');
-    background-size: 100vw 100vh;
+    background-size: 100vw 625px;
     background-repeat: no-repeat;
+    margin-top: 0;
+    position: relative;
 
-    @media (max-width: 450px){
+    @media (max-width: 768px){
+        height: 100vh;
         background: url('/static/images/mobilebg.png');
-        background-size: 100vw 90vh;
         background-repeat: no-repeat;
+        background-size: 100vw 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -44,6 +47,10 @@ const ImageContainer = styled.div`
 
     @media (max-width: 450px){
         display: none;
+    }
+
+    @media (max-width: 768px){
+        right: 70vw;
     }
 
     @keyframes database{
@@ -92,6 +99,7 @@ const Content = styled.div`
     @media (max-width: 450px){
         position: static;
     }
+    
 `;
 
 const SpecialOffers = styled.div`
@@ -119,6 +127,10 @@ const SpecialOffers = styled.div`
     @media (max-width: 450px){
         position: static;
         margin: 0;
+    }
+
+    @media (max-width: 768px){
+        bottom: 150px;
     }
 `;
 

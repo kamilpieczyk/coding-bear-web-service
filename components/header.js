@@ -440,10 +440,14 @@ class Header extends Component{
 
                 <div>
                     <StoreConsumer>
-                            { ({user}) => (
+                            { ({user, setLoading}) => (
                                 user.logged
                                 ? <UserMenu name={user.name} />
-                                : <ButtonRed title = 'SIGN UP' to='/signup' />
+                                : <ButtonRed 
+                                    title = 'SIGN UP' 
+                                    to='/signup' 
+                                    action ={() => setLoading(true)}
+                                   />
                             )}
                     </StoreConsumer>
                 </div>

@@ -20,12 +20,12 @@ const Button = styled.button`
 
 const ButtonRed = ({ title, to, rounded, action }) => (
     <>
-        {to?
-            <Link href={ to }>
-                <Button rounded = { rounded }>{ title }</Button>
-            </Link> :
+        { to
+            ? <Link href={ to }>
+                <Button rounded = { rounded } onClick={action} >{ title }</Button>
+              </Link>
 
-            <Button rounded = { rounded } onClick={action}>{ title }</Button>
+            : <Button rounded = { rounded } onClick={action}>{ title }</Button>
         }
     </>
 );

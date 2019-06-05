@@ -29,11 +29,19 @@ const Content = styled.div`
         justify-content: center;
         color: ${colors.white};
         font-weight: 100;
+        
         p{
             width: 80%;
         }
+        
         @media (max-width: 450px){
             align-items: center;
+        }
+        
+        @media (max-width: 768px){
+            img{
+                width: 90%;
+            }
         }
     }
     div:first-child{
