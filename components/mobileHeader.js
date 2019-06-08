@@ -24,7 +24,7 @@ const Container = styled.nav`
 `;
 
 const Button = styled.div`
-    width: 10vw;
+    width: 40px;
     height: 70%;    
     cursor: pointer;
     div{
@@ -51,10 +51,10 @@ const Menu = styled.div`
     left: 50%;
     transform: translate(-50%);
     z-index: 55;
-    height: ${props => props.active ? "70vh" : 0};
+    width: 100vw;
+    height: ${props => props.active ? "80vh" : 0};
     opacity: ${props => props.active ? 1 : 0};
-    overflow: hidden;
-    width: 90vw;
+    overflow: auto;
     background: ${colors.darkWhite};
     border-radius: 0 0 10px 10px;
     display: flex;

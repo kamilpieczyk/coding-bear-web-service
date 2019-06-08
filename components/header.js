@@ -1,12 +1,11 @@
-import { Component } from 'react';
-import styled from 'styled-components';
-import colors from '../styles/colors';
-import Link from 'next/link';
-import ButtonRed from './buttonRed';
-import {StoreConsumer} from "../context/store.context";
-import cookie from "browser-cookies";
-import UserMenu from "./userMenu";
-import Router from "next/router";
+import { Component } from 'react'
+import styled from 'styled-components'
+import colors from '../styles/colors'
+import Link from 'next/link'
+import ButtonRed from './buttonRed'
+import {StoreConsumer} from "../context/store.context"
+import cookie from "browser-cookies"
+import UserMenu from "./userMenu"
 
 const Container = styled.nav`
     position: fixed;
@@ -25,6 +24,10 @@ const Container = styled.nav`
 
     div:nth-child(2){
         display: flex;        
+    }
+
+    @media (max-width: 1050px) {
+        padding: 0 2%;
     }
 `;
 
@@ -394,14 +397,16 @@ class Header extends Component{
                     {/* menu container */}
                     { this.state.menu !== null ? 
                         this.state.menu.map( el => (
-                            <MenuItem key={ el.title }>
-                                <Link href={ el.to }>
-                                { el.submenu ? 
-                                    <a onClick={ this.handleSubmenuClick }>{ el.title }</a> :
-                                    <a>{ el.title }</a>
-                                }
-                                </Link>
-                            </MenuItem>
+                            <StoreConsumer>{ ({setLoading, loading}) => (
+                                <MenuItem key={ el.title }>
+                                    <Link href={ el.to }>
+                                    { el.submenu ? 
+                                        <a onClick={ this.handleSubmenuClick }>{ el.title }</a> :
+                                        <a onClick = { () => setLoading(true) }>{ el.title }</a>
+                                    }
+                                    </Link>
+                                </MenuItem>
+                            )}</StoreConsumer>
                         ) ) :
                     null }
                     {/* menu special items (search sign in) */}
@@ -492,64 +497,83 @@ class Header extends Component{
                 </SignIn>
 
                 {/* submenu for solutions */}
-                { this.state.menu ? <Submenu visible={ this.state.submenu }>
+                <StoreConsumer>{ ({setLoading}) => (
 
-                    <section>
-                        <div>
-                            <img src="/static/images/solutions_frontend.png" alt="frontend"/>
-                            <h1>Frontend web solutions</h1>
-                        </div>
+                    this.state.menu 
+                        ? <Submenu visible={ this.state.submenu }>
 
-                        { this.state.menu[2].submenu[0].map( el => (
-                        <Link key={ el.name } href={ { pathname: '/solutions', query: { name: el.to } } }>
-                            <a onClick = {() => this.setState({submenu: false})}>{ el.name }</a>
-                        </Link>
-                    )) }
+                            <section>
+                                <div>
+                                    <img src="/static/images/solutions_frontend.png" alt="frontend"/>
+                                    <h1>Frontend web solutions</h1>
+                                </div>
 
-                    </section>
+                                { this.state.menu[2].submenu[0].map( el => (
+                                <Link key={ el.name } href={ { pathname: '/solutions', query: { name: el.to } } }>
+                                    <a onClick = {() => {
+                                        this.setState({submenu: false});
+                                        setLoading(true);
+                                    }}>{ el.name }</a>
+                                </Link>
+                            )) }
 
-                    <section>
-                        <div>
-                            <img src="/static/images/solutions_backend.png" alt="backend"/>
-                            <h1>Backend web solutions</h1>
-                        </div>
+                            </section>
 
-                        { this.state.menu[2].submenu[1].map( el => (
-                        <Link key={ el.name } href={ { pathname: '/solutions', query: { name: el.to } } }>
-                            <a onClick = {() => this.setState({submenu: false})}>{ el.name }</a>
-                        </Link>
-                    )) }
+                            <section>
+                                <div>
+                                    <img src="/static/images/solutions_backend.png" alt="backend"/>
+                                    <h1>Backend web solutions</h1>
+                                </div>
 
-                    </section>
+                                { this.state.menu[2].submenu[1].map( el => (
+                                    
+                                <Link key={ el.name } href={ { pathname: '/solutions', query: { name: el.to } } }>
+                                    <a onClick = {() => {
+                                        this.setState({submenu: false});
+                                        setLoading(true);
+                                    }}>{ el.name }</a>
+                                </Link>
+                            )) }
 
-                    <section>
-                        <div>
-                            <img src="/static/images/solutions_mobile.png" alt="mobile"/>
-                            <h1>Mobile solutions</h1>
-                        </div>
+                            </section>
 
-                        { this.state.menu[2].submenu[2].map( el => (
-                        <Link key={ el.name } href={ { pathname: '/solutions', query: { name: el.to } } }>
-                            <a onClick = {() => this.setState({submenu: false})}>{ el.name }</a>
-                        </Link>
-                    )) }
+                            <section>
+                                <div>
+                                    <img src="/static/images/solutions_mobile.png" alt="mobile"/>
+                                    <h1>Mobile solutions</h1>
+                                </div>
 
-                    </section>
+                                { this.state.menu[2].submenu[2].map( el => (
+                                <Link key={ el.name } href={ { pathname: '/solutions', query: { name: el.to } } }>
+                                    <a onClick = {() => {
+                                        this.setState({submenu: false});
+                                        setLoading(true);
+                                    }}>{ el.name }</a>
+                                </Link>
+                            )) }
 
-                    <section>
-                        <div>
-                            <img src="/static/images/solutions_desktop.png" alt="desktop"/>
-                            <h1>Desktop solutions</h1>
-                        </div>
+                            </section>
 
-                        { this.state.menu[2].submenu[3].map( el => (
-                        <Link key={ el.name } href={ { pathname: '/solutions', query: { name: el.to } } }>
-                            <a onClick = {() => this.setState({submenu: false})}>{ el.name }</a>
-                        </Link>
-                    )) }
+                            <section>
+                                <div>
+                                    <img src="/static/images/solutions_desktop.png" alt="desktop"/>
+                                    <h1>Desktop solutions</h1>
+                                </div>
 
-                    </section>
-                </Submenu> : null }
+                                { this.state.menu[2].submenu[3].map( el => (
+                                <Link key={ el.name } href={ { pathname: '/solutions', query: { name: el.to } } }>
+                                    <a onClick = {() => {
+                                        this.setState({submenu: false});
+                                        setLoading(true);
+                                    }}>{ el.name }</a>
+                                </Link>
+                            )) }
+
+                            </section>
+                        </Submenu> 
+                        
+                    : null 
+                )}</StoreConsumer>
 
             </Container>
         )

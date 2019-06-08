@@ -5,7 +5,6 @@ import MainLayout from '../layouts/mainLayout'
 import Head from 'next/head'
 import colors from '../styles/colors'
 import {StoreConsumer} from "../context/store.context"
-import Title from "../components/title"
 
 const Wrapper = styled.div`
     margin: 100px 0;
@@ -66,9 +65,9 @@ const Solutions = ({router}) => {
 
         <React.Fragment>
             
-            { !loaded && 
+            {/* { !loaded && 
             <StoreConsumer>{({loading, setLoading}) => ( loading && setLoading(false))}</StoreConsumer>
-            }
+            } */}
 
             <Head>
                 <title>coding-bear solutions - {content.title}</title>
@@ -88,7 +87,7 @@ const Solutions = ({router}) => {
                 <Wrapper>{
                     content.content.map( article => (
                         <Contnet>
-                            <Title>{article.title}</Title>
+                            <h2>{article.title}</h2>
                             <div>{article.content}</div>
                         </Contnet>
                     ))

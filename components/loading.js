@@ -52,7 +52,7 @@ const Container = styled.div`
 const Loading = ({active}) => {
     return(
         <Container visible={active}>
-            <h1>site is loading now</h1>
+            <h1>site is loading</h1>
             <div></div>
             <div></div>
             <div></div>
