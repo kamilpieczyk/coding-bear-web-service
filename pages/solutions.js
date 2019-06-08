@@ -65,9 +65,9 @@ const Solutions = ({router}) => {
 
         <React.Fragment>
             
-            {/* { !loaded && 
+            { !loaded && 
             <StoreConsumer>{({loading, setLoading}) => ( loading && setLoading(false))}</StoreConsumer>
-            } */}
+            }
 
             <Head>
                 <title>coding-bear solutions - {content.title}</title>
