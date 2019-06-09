@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import MainLayout from '../layouts/mainLayout'
 import Head from 'next/head'
 import colors from '../styles/colors'
-import {StoreConsumer} from "../context/store.context"
+import { StoreConsumer } from "../context/store.context"
 
 const Wrapper = styled.div`
     margin: 100px 0;
@@ -61,12 +61,22 @@ const Solutions = ({router}) => {
         document.addEventListener('load', () => setLoaded(true));
     });
 
+    const handleLoading = ( callback ) => {
+        setTimeout( () => {
+            callback(false);
+        }, 1000)
+    }
+
     return(
 
         <React.Fragment>
             
             { !loaded && 
-            <StoreConsumer>{({loading, setLoading}) => ( loading && setLoading(false))}</StoreConsumer>
+
+                <StoreConsumer>{
+                    ({loading, setLoading}) => ( loading && handleLoading( setLoading ))
+                }</StoreConsumer>
+
             }
 
             <Head>

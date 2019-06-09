@@ -6,6 +6,7 @@ import ButtonRed from './buttonRed'
 import {StoreConsumer} from "../context/store.context"
 import cookie from "browser-cookies"
 import UserMenu from "./userMenu"
+import Router from "next/router"
 
 const Container = styled.nav`
     position: fixed;
@@ -161,6 +162,7 @@ const Submenu = styled.div`
         color: ${ colors.main };
         text-decoration: none;
         font-weight: 100;
+        cursor: pointer;
         :hover{
             text-decoration: underline;
         }
@@ -400,9 +402,9 @@ class Header extends Component{
                             <StoreConsumer>{ ({setLoading, loading}) => (
                                 <MenuItem key={ el.title }>
                                     <Link href={ el.to }>
-                                    { el.submenu ? 
-                                        <a onClick={ this.handleSubmenuClick }>{ el.title }</a> :
-                                        <a onClick = { () => setLoading(true) }>{ el.title }</a>
+                                    { el.submenu 
+                                        ? <a onClick={ this.handleSubmenuClick }>{ el.title }</a>
+                                        : <a onClick = { () => setLoading(true) }>{ el.title }</a>
                                     }
                                     </Link>
                                 </MenuItem>
@@ -497,7 +499,7 @@ class Header extends Component{
                 </SignIn>
 
                 {/* submenu for solutions */}
-                <StoreConsumer>{ ({setLoading}) => (
+                <StoreConsumer>{ ({setLoading, loading}) => (
 
                     this.state.menu 
                         ? <Submenu visible={ this.state.submenu }>
@@ -509,12 +511,12 @@ class Header extends Component{
                                 </div>
 
                                 { this.state.menu[2].submenu[0].map( el => (
-                                <Link key={ el.name } href={ { pathname: '/solutions', query: { name: el.to } } }>
-                                    <a onClick = {() => {
+    
+                                    <a key={ el.name } onClick = {() => {
                                         this.setState({submenu: false});
-                                        setLoading(true);
+                                        Router.push({ pathname: '/solutions', query: { name: el.to } })
                                     }}>{ el.name }</a>
-                                </Link>
+                                
                             )) }
 
                             </section>

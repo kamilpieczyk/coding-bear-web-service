@@ -2,8 +2,14 @@ import React from 'react'
 import App, { Container } from 'next/app'
 import Loading from "../components/loading"
 import { StoreConsumer, StoreProvider } from "../context/store.context"
+import Router from "next/router"
 
 class MyApp extends App {
+
+  state = {
+    loading: false
+  }
+
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
 
@@ -14,17 +20,34 @@ class MyApp extends App {
     return { pageProps };
   }
 
+  componentDidMount(){
+    const handleRouteChange = () => {
+
+      this.setState({ loading: true });
+
+    }
+
+    Router.events.on('routeChangeStart', handleRouteChange);
+
+  }
+
   render() {
     const { Component, pageProps } = this.props;
 
     return (
         <StoreProvider>
             <Container>
-                <StoreConsumer>
-                    { ({loading}) => (
-                        <Loading active={loading} />
-                    )}
-                </StoreConsumer>
+                <StoreConsumer>{ 
+                  ({ loading, setLoading }) => {
+                    if( this.state.loading ) {
+                      setLoading(true);
+                      this.setState({ loading: false });
+                    }
+                    return(
+                      <Loading active={loading} />
+                    )
+                  }
+                }</StoreConsumer>
                 <Component {...pageProps} />
             </Container>
         </StoreProvider>

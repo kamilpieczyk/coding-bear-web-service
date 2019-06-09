@@ -18,7 +18,12 @@ class SignUp extends Component{
     }
 
     componentDidMount(){
-        document.addEventListener('load', () => this.setState({loaded: true}));
+        document.addEventListener('load', () => {
+            setTimeout(() => {
+                this.setState({loaded: true});
+            }, 1000)
+
+        })
     }
 
     render(){
