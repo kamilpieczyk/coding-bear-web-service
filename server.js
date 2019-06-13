@@ -45,6 +45,7 @@ const server = ( handle ) => {
     server.post(api + 'voucher' , require('./routes/voucher'));
     server.post(api + 'voucher-finnish' , require('./routes/voucher-finnish'));
     server.post(api + 'get-projects' , require('./routes/getProjects'));
+    server.post( api + 'add-new-project' , require('./routes/addNewProject'));
 
     //apply email route
     server.get('/register', require('./routes/applyEmail'));

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import colors  from '../styles/colors'
 import ButtonRed from "../components/buttonRed";
+import cookie from "browser-cookies";
 
 const Container = styled.section`
     display: flex;
@@ -180,6 +181,7 @@ export default () => {
     const [ company, setCompany ] = useState('');
     const [ name, setName ] = useState('');
     const [ companyFunction, setCompanyFunction ] = useState('');
+    const [ phone, setPhone ] = useState('');
     const [ kindOfService, setKindOfService ] = useState(null);
     const [ budget, setBudget ] = useState(null);
     const [ visualInentyfi, setVisualInentyfi ] = useState(null);
@@ -221,8 +223,17 @@ export default () => {
                         label={`what is your function in the ${ company ? company : "company" }?`}
                     /> 
                 }
-
+                
                 { stage === 4 && 
+                    <TextInput 
+                        value={ phone } 
+                        changeEv={ setPhone } 
+                        placeholder="phone number"
+                        label={`Your mobile phone number`}
+                    /> 
+                }
+
+                { stage === 5 && 
                     <ChooseInput 
                         label="What kind of service do you need?"
                         options={[
@@ -240,7 +251,7 @@ export default () => {
                     />
                 }
                 
-                { stage === 5 && 
+                { stage === 6 && 
                     <ChooseInput 
                         label="How big is your budget for this project?"
                         options={[
@@ -258,7 +269,7 @@ export default () => {
                     />
                 }
 
-                { stage === 6 && 
+                { stage === 7 && 
                     <ChooseInput 
                         label="Has your company visual identyfication system?"
                         options={[
@@ -271,7 +282,7 @@ export default () => {
                     />
                 }
                 
-                { stage === 7 && 
+                { stage === 8 && 
                     <ChooseInput 
                         label="When do you need your project ready?"
                         options={[
@@ -288,7 +299,7 @@ export default () => {
                     />
                 }
                 
-                { stage === 8 && 
+                { stage === 9 && 
                     <TextareaInput
                         label="Describe your project"
                         value={ description }
@@ -296,7 +307,7 @@ export default () => {
                     />
                 }
                 
-                { stage === 9 && 
+                { stage === 10 && 
                     <React.Fragment>
                         <label>thank you!</label>
                         <p>That was the last question. Please make sure that your answers are truthfully and correct. Once you're ready click on the finish button.</p>
@@ -306,21 +317,58 @@ export default () => {
                             title="add new project" 
                             action={ (e) => { 
                                 e.preventDefault(); 
-                                console.log("send") 
+
+                                fetch('/api/9b859fee-242d-4e66-bde3-7febc4c77b95/add-new-project', {
+                                    method: 'POST',
+                                    headers: {"content-type": "application/json"},
+                                    body: JSON.stringify({
+                                        passport: cookie.get('passport'),
+                                        companyName: company,
+                                        name: name,
+                                        functionInCompany: companyFunction,
+                                        phone: phone,
+                                        budget: budget,
+                                        visualIdentyfication: visualInentyfi,
+                                        deadline: deadline,
+                                        description: description,
+                                    })
+                                })
+                                .then( res => res.json())
+                                .then( json => {
+                                    if(json.status === "ok") setStage(11);
+                                    else setStage(12);
+                                })
+                                .catch( err => console.log(err));
                             } } 
                         />
 
                     </React.Fragment>
                 }
 
+                { stage === 11 && 
+                    <React.Fragment>
+                        <label>Succes</label>
+                        <p>Your project has been succesfully added</p>
+                        <p>you can check progress in your projects</p>
+                    </React.Fragment>
+                }
+
+                { stage === 12 && 
+                    <React.Fragment>
+                        <label>Failed</label>
+                        <p>Something went wrong</p>
+                        <p>Please try again</p>
+                    </React.Fragment>
+                }
+
                 <div>
-                    { stage > 0 && 
+                    { stage > 0 && stage !== 11 && stage !== 12 && 
                         <ButtonRed
                             title="< prev" 
                             action={ (e) => { e.preventDefault(); setStage(stage-1); } } 
                         />
                     }
-                    { stage < 9 &&
+                    { stage < 10 &&
                         <ButtonRed 
                             title="next >" 
                             action={ (e) => { e.preventDefault(); setStage(stage+1); } } 

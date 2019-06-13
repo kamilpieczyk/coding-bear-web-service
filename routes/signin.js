@@ -2,8 +2,9 @@ const MongoClient = require('mongodb').MongoClient;
 const test = require('assert');
 const dbConnect= require('../dbConnect');
 const bcrypt = require('bcrypt');
+const passportGenerator = require('hash-generator');
 
-const signin = ( req,res ) => {
+const signin = ( req, res ) => {
 
     const client = new MongoClient(dbConnect.uri, {useNewUrlParser: true});
     const body = req.body;
@@ -30,7 +31,7 @@ const signin = ( req,res ) => {
             collection.find({email: user.email}).toArray((err, data) => {
                 test.equal(null, err);
                 if(data[0]){
-                    const passport = data[0].passport;
+                
                     const password = data[0].password;
                     const status = data[0].status;
 
@@ -39,6 +40,8 @@ const signin = ( req,res ) => {
                     }
                     else{
                         if(bcrypt.compareSync(user.password, password)){
+                            const passport = passportGenerator(20);
+                            collection.updateOne({email: user.email}, {$set: { passport }});
                             res.cookie("passport", passport, {maxAge: 14400000});
                             res.json({
                                 status: "ok",
@@ -59,6 +62,8 @@ const signin = ( req,res ) => {
                 }
             })
         })
+
+        client.close();
     }
     
 }
