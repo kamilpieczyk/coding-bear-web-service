@@ -19,16 +19,19 @@ const Menu = styled.nav`
     justify-content: flex-start;
     align-items: center;
     border-right: 1px dotted ${colors.second};
+    border-top: 1px dotted ${colors.second};
     overflow: auto;
     height: 100%;
 `;
 
 const ProjectButton = styled.button`
-    border: 1px solid ${colors.main};
+    border: none;
+    border-bottom: 1px dotted ${colors.second};
     padding: 10px;
     color: ${colors.main};
     cursor: pointer;
-    margin-bottom: 10px;
+    background: none;
+    width: 100%;
 `;
 
 const Content = styled.div`

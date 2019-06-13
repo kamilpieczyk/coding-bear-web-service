@@ -1,16 +1,17 @@
 import styled from 'styled-components'
 import AppLayout from '../layouts/appLayout'
 import Head from 'next/head'
-import {StoreConsumer} from "../context/store.context"
+import { StoreConsumer } from "../context/store.context"
 import AlertApp from "../app_components/AlertApp"
-import ProjectsApp from "../app_components/ProjectsApp"
 import React, { useState, useEffect } from 'react'
+import NewProjectApp from '../app_components/newProjectApp'
 
 const Container = styled.div`
 `;
 
 const MyProjects = () => {
     const [loaded, setLoaded] = useState(false);
+
     useEffect(() => {
         document.addEventListener('load', () => setLoaded(true));
     });
@@ -18,21 +19,21 @@ const MyProjects = () => {
     return(
         <>
             { !loaded && 
-            <StoreConsumer>{
-                ({loading, setLoading}) => ( loading && setLoading(false) )
-            }</StoreConsumer>
+                <StoreConsumer>{
+                    ({loading, setLoading}) => ( loading && setLoading(false) )
+                }</StoreConsumer>
             }
 
             <AppLayout>
                 <Head>
-                    <title>My projects || Coding - bear bespoke websites and apps</title>
+                    <title>Add new project || Coding - bear bespoke websites and apps</title>
                 </Head>
 
                 <Container>
                     <StoreConsumer>{
                         ({user}) => (
                             user.logged
-                                ? <ProjectsApp email={user.email} name={user.name}/>
+                                ? <NewProjectApp />
 
                                 : <AlertApp title ="Application alert">
                                     You need to sign in to see this page
