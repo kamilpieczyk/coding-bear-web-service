@@ -163,7 +163,8 @@ function data(name) {
             content: [
                 {
                     title: "Powerfull react.js",
-                    content: "React.js is a javascript framework which has been made by facebook developers. Thanks to react web devs are able to build applications better and faster than in common java-script. The main feature of react is virtual document-object-model. React stores the entire DOM of the application in memory, after changing the state searches for differences between the virtual and real DOM and updates the changes. \n The framework is very powerfull. A lot of famous brand like facebook, netflix, pinterest, instagram, etc. are using react - whole have been build in it. If you would like to see an example - just check facebook.com - this is react."
+                    content: "React.js is a javascript framework which has been made by facebook developers. Thanks to react web devs are able to build applications better and faster than in common java-script. The main feature of react is virtual document-object-model. React stores the entire DOM of the application in memory, after changing the state searches for differences between the virtual and real DOM and updates the changes. \n The framework is very powerfull. A lot of famous brand like facebook, netflix, pinterest, instagram, etc. are using react - whole have been build in it. If you would like to see an example - just check facebook.com - this is react.",
+                    image: "static/images/react-logo-1.png"
                 },
                 {
                     title: "Very light vue.js",
@@ -187,7 +188,7 @@ function data(name) {
                     content: "Java-script is the most popular programming language since many years. It is like that because it's just one of the most intuitive, modern and practical. \n On the beginning javascript was rendered only browser side - that was time when imperfect PHP reigned on server side. Thanks to one of the best developers across the world - Ryan Dahl since 2009 we can run javascript everywhere. He has created node.js - the runtime for javascript out of the browser. To do this he used v8 engine by google - the best js interpreter. Novadays, developers are focused to improve one language, not like formerly -one for frontend, one for backend and another for differend things. Coding-bear's working with both of the languages full-stack javascript and PHP. Node.js with pleasure - PHP if it is absolutley required by customer."
                 },
                 {
-                    title: "Databeses",
+                    title: "Databases",
                     content: "Nowadays a lot of companies choose MongoDB, because its non SQL database - not like MySQL or PostgreSQL. This approach has a lot of benefits and a lot of defects. SQL databases are exposed for SQL injection attacks - but they have strong relations between records. Non SQL databases haven't relations but they don't use SQL language. Which one is the best? There is not a clear ansver for this question. Everything depends. Usually MongoDb is just enough for most projects but sometimes applications are very expand and needs relations beetween records. Coding-bear usually recomands MongoDB"
                 },
             ]
@@ -195,32 +196,35 @@ function data(name) {
         
         android: {
             title: "Android native applications",
-            image: "/static/images/backend.png",
-            description: "Nowadays many popular javascript frameworks are used for developing modern web applications. Coding-bear usually works with two: react.js for bigger projects and vue.js for small projects",
+            image: "/static/images/mobile.png",
+            description: "Nowadays every popular brand has own mobile application - even government has",
             content: [
                 {
-                    title: "Powerfull react.js",
-                    content: "React.js is a javascript framework which has been made by facebook developers for faster, easier and much more safty coding. Thanks to react web-developers are able to build applications better. The main feature of react is virtual document-object-model. React stores the entire DOM of the application in memory, after changing the state searches for differences between the virtual and real DOM and updates the changes. \n The framework is very powerfull. A lot of famous brand like facebook, netflix, pinterest, instagram, etc. are using react - whole have been build in it. If you would like to see an example - just check facebook.com - this is react."
+                    title: "React native",
+                    content: "React is everywhere - but this time it's going with mobile solutions . It is not only for web solutions. Facebook released likewise a special version of this library for native mobile applications. Using android studio to compile code we can create very fast and modern looking apps for android devices.",
+                    image: "static/images/react-native.png"
                 },
                 {
-                    title: "Very light vue.js",
-                    content: "Vue.js is exacly like react a JavaScript framework for building user interfaces and single-page applications. Vue is an open-source solution created by Evan You and realised first time in 2014. Now in 2019 vue is very fast and light."
+                    title: "We will add your application to play store",
+                    content: "Application is useless if nobody knows that it exist. The best chance for your brand to be seen is put your it just into play store and observe how many people download it.",
+                    image: "static/images/play-store.png"
                 },
+                
             ]
         },
 
         windows: {
             title: "Windows desktop apps",
-            image: "/static/images/backend.png",
-            description: "Nowadays many popular javascript frameworks are used for developing modern web applications. Coding-bear usually works with two: react.js for bigger projects and vue.js for small projects",
+            image: "/static/images/desktop_apps.png",
+            description: "Javascript can do more than you think it can",
             content: [
                 {
-                    title: "Powerfull react.js",
-                    content: "React.js is a javascript framework which has been made by facebook developers for faster, easier and much more safty coding. Thanks to react web-developers are able to build applications better. The main feature of react is virtual document-object-model. React stores the entire DOM of the application in memory, after changing the state searches for differences between the virtual and real DOM and updates the changes. \n The framework is very powerfull. A lot of famous brand like facebook, netflix, pinterest, instagram, etc. are using react - whole have been build in it. If you would like to see an example - just check facebook.com - this is react."
+                    title: "Windows applications",
+                    content: "You need application for you bussiness but preffer a standard desktop solutions - not in browser apps? Coding-bear meets your expectations and is ready to create it for you."
                 },
                 {
-                    title: "Very light vue.js",
-                    content: "Vue.js is exacly like react a JavaScript framework for building user interfaces and single-page applications. Vue is an open-source solution created by Evan You and realised first time in 2014. Now in 2019 vue is very fast and light."
+                    title: "Electron.js",
+                    content: "Electron is an open-source framework developed and maintained by GitHub. It combines the Chromium rendering engine and the Node.js runtime."
                 },
             ]
         },
