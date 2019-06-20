@@ -36,6 +36,7 @@ const server = ( handle ) => {
     //api get request
     server.get(api + 'menu', require('./routes/menuRoute'));
     server.get(api + 'home', require('./routes/homeRoute'));
+    server.get(api + 'about', require('./routes/aboutRoute'));
 
     //api post request
     server.post(api + 'subscribe-email' , require('./routes/subscribeEmailRoute'));

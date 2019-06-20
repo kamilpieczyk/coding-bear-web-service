@@ -51,9 +51,11 @@ export class StoreProvider extends Component{
     }
 
     setLoading = (bool) => {
-        this.setState({
-            loading: bool
-        })
+        setTimeout( () => {
+            this.setState({
+                loading: bool
+            })
+        }, 1000)
     }
 
     componentDidMount(){

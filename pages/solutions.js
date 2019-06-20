@@ -90,12 +90,6 @@ const Solutions = ({ router }) => {
         document.addEventListener('scroll', (e) => handleScrollEffect(e) );
     });
 
-    const handleLoading = ( callback ) => {
-        setTimeout( () => {
-            callback(false);
-        }, 1000)
-    }
-
     return(
 
         <React.Fragment>
@@ -103,7 +97,7 @@ const Solutions = ({ router }) => {
             { !loaded && 
 
                 <StoreConsumer>{
-                    ({loading, setLoading}) => ( loading && handleLoading( setLoading ))
+                    ({loading, setLoading}) => ( loading && setLoading( false ) )
                 }</StoreConsumer>
 
             }

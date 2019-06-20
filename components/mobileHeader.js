@@ -116,12 +116,12 @@ const MobileHeader = () => {
 
     const scroll = () => {
         const scroll = window.scrollY;
-        if(scroll > 350) setScrolled(true);
+        if(scroll > 100) setScrolled(true);
         else setScrolled(false);
 
         window.addEventListener('scroll', () => {
             const scroll = window.scrollY;
-            if(scroll > 350) setScrolled(true);
+            if(scroll > 100) setScrolled(true);
             else setScrolled(false);
         })
     }
