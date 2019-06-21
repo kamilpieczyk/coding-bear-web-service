@@ -25,6 +25,11 @@ const MapContainer = styled.div`
         flex-direction: column;
         justify-content: center;
     }
+
+    @media (max-width: 360px){
+        flex-direction: column;
+        height: 200vh;
+    }
 `;
 
 const Form = styled.form`
@@ -68,6 +73,74 @@ const Form = styled.form`
         border-radius: 5px;
     }
 `;
+
+const ContentContainer = styled.section`
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background: linear-gradient(130deg, ${colors.main}, ${colors.third});
+    div{
+        flex: 1;
+    }
+    div:nth-child(1){
+        background: ${ colors.darkWhite };
+    }
+    div:nth-child(2){
+
+    }
+    @media(max-width: 360px){
+        flex-direction: column;
+    }
+
+`;
+
+const MemberContainer = styled.div`
+    color: ${ props => props.dark ? colors.main : colors.white };
+    background: none !important;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1, h2{
+        margin: 0;
+    }
+    h2{
+        color: ${ colors.second };
+        font-size: 1rem;
+    }
+    div{
+        display: flex;
+        max-height: 30px;
+        position: relative;
+        img{
+            position: relative;
+            top: 13px;
+        }
+    }
+`;
+
+const Member = ({ name, func, phone, email, dark}) => (
+    <MemberContainer dark={ dark }>
+        <h1>{ name }</h1>
+        <h2>{ func }</h2>
+        <div>
+            <img 
+                src={ dark ? "static/images/mobile-contact-dark.png" : "static/images/mobile-contact.png" }
+                alt="phone"
+            />
+            <p>{ phone }</p>
+        </div>
+        <div>
+            <img 
+                src={ dark ? "static/images/email-contact-dark.png" : "static/images/email-contact.png" }
+                alt="email"
+            />
+            <p>{ email }</p>
+        </div>
+    </MemberContainer>
+)
 
 export default () => {
     const  [ loaded, setLoaded ] = useState(false);
@@ -212,6 +285,24 @@ export default () => {
 
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d299.81692257456837!2d-2.9939235140545692!3d53.04668711909766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2566c64d45e46e7f!2sWrexham+Enterprise+Hub!5e0!3m2!1spl!2suk!4v1561114397830!5m2!1spl!2suk" frameborder="0" allowfullscreen></iframe>
             </MapContainer>
+
+            <ContentContainer>
+                <div>
+                    <Member dark 
+                        name="Kamil Pieczyk"
+                        func="full stack javascript developer" 
+                        phone="07 593 706 457" 
+                        email="kamil@coding-bear.co.uk"
+                    /></div>
+                <div>
+                    <Member 
+                        name="Monika Zieba"
+                        func="manager" 
+                        phone="07 432 245 003"
+                        email="monika127@onet.eu"
+                    />
+                    </div>
+            </ContentContainer>
 
         </MainLayout>
     )
