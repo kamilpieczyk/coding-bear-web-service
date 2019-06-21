@@ -5,30 +5,46 @@ import MainLayout from '../layouts/mainLayout'
 import Head from 'next/head'
 import colors from '../styles/colors'
 import { StoreConsumer } from "../context/store.context"
+import Particles from "react-particles-js"
+import particles from "../styles/particles"
 
 const Wrapper = styled.div`
     margin: 100px 0;
+    background: ${ colors.darkWhite };
+    z-index: 10000;
 `;
 
 const Container = styled.section`
     width: 100vw;
     height: 100vh;
     background: linear-gradient(130deg, ${colors.main}, ${colors.third});
-    opacity: ${ props => props.opacity ? props.opacity : 1 };
+    opacity: ${ props => props.opacity && props.opacity };
+    position:fixed;
+    top: 0;
+    
+    @media(max-width: 768px){
+        height: 768px;
+    }
+`;
+
+const ContentContainer = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     padding: 0 10%;
+    opacity: ${ props => props.opacity && props.opacity };
+    overflow: hidden;
 
     @media(max-width: 450px){
         flex-direction: column;
         padding-top: 80px;
         justify-content: center;
-    }
-    
-    @media(max-width: 768px){
-        height: 768px;
     }
 `;
 
@@ -71,14 +87,14 @@ const Solutions = ({ router }) => {
         const scroll = window.scrollY;
         const height = window.innerHeight;
         const percent = scroll / height;
-        const opacityDecrement = 1 - percent.toFixed(1) - 0.2;
-        const opacityIncrement = 0 + opacityDecrement + 0.2;
+        const opacityDecrement = 1 - percent;
+        const opacityIncrement = 0 + opacityDecrement;
 
         if(scroll > oldScroll){
             oldScroll = scroll;
             setOpacity( opacityDecrement )
         }
-        else if(scroll < oldScroll){
+        else if(scroll <= oldScroll){
             oldScroll = scroll;
             setOpacity( opacityIncrement )
         }
@@ -108,6 +124,15 @@ const Solutions = ({ router }) => {
 
             <MainLayout>
                 <Container opacity = { opacity } >
+                    <StoreConsumer>{
+                        ({ device }) => (
+                            device === "mobile"
+                                ? <Particles width="100vw" height="100vh" params={particles.mobile} />
+                                : <Particles width="100vw" height="100vh" params={particles.desktop} />
+                        )
+                    }</StoreConsumer>
+                </Container>
+                <ContentContainer opacity = { opacity } >
                     <img src={content.image} alt="solutions-image" />
                     <Front>
                         <TitleFront>{content.title}</TitleFront>
@@ -115,8 +140,8 @@ const Solutions = ({ router }) => {
                             {content.description}
                         </p>
                     </Front>
-                    
-                </Container>
+                </ContentContainer>
+                <div style={{ height: "100vh", width: "100vw" }}></div>
                 <Wrapper>{
                     content.content.map( article => (
                         <Contnet>

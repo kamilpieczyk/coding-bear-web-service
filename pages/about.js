@@ -5,6 +5,7 @@ import MainLayout from '../layouts/mainLayout'
 import Head from 'next/head'
 import { StoreConsumer } from "../context/store.context"
 import Particles from "react-particles-js"
+import particles from "../styles/particles"
 
 const Container = styled.section`
     width: 100vw;
@@ -15,6 +16,9 @@ const Container = styled.section`
 
     div{
         margin: 0 0 0 20px;
+    }
+    @media(max-width: 450px){
+        height: 100vh
     }
 `;
 
@@ -71,44 +75,6 @@ export default () => {
         fetchData();
     }, [] )
 
-    const particlesDesktop = {
-        "particles": {
-            "number": {
-                "value": 150
-            },
-            "size": {
-                "value": 3
-            }
-        },
-        "interactivity": {
-            "events": {
-                "onhover": {
-                    "enable": true,
-                    "mode": "repulse"
-                }
-            }
-        }
-    }
-
-    const particlesMobile = {
-        "particles": {
-            "number": {
-                "value": 30
-            },
-            "size": {
-                "value": 3
-            }
-        },
-        "interactivity": {
-            "events": {
-                "onhover": {
-                    "enable": true,
-                    "mode": "repulse"
-                }
-            }
-        }
-    }
-
     return(
         <MainLayout>
             <Head>
@@ -125,8 +91,8 @@ export default () => {
                 <StoreConsumer>{
                     ({ device }) => (
                         device === "mobile"
-                            ? <Particles width="100vw" height="100vh" params={particlesMobile} />
-                            : <Particles width="100vw" height="100vh" params={particlesDesktop} />
+                            ? <Particles width="100vw" height="100vh" params={particles.mobile} />
+                            : <Particles width="100vw" height="100vh" params={particles.desktop} />
                     )
                 }</StoreConsumer>
 

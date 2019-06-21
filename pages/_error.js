@@ -88,11 +88,6 @@ const _error = () => {
                     or is not ready jet - in this case <br/>
                     pleas try again for few days.
                 </section>
-
-                <article>
-                    if you've got voucher pleas return next week<br/>
-                    coding-bear.co.uk is now in renovation.
-                </article>
             </Container>
         </>
     )
